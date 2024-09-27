@@ -4,6 +4,7 @@ import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Text } from 'react-native';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -23,6 +24,17 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name='(inventory)'
+        options={{
+          title: 'Inventory',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          ),
+          headerTitle:'Helo'
+        }}
+        >
+      </Tabs.Screen>
       <Tabs.Screen
         name="explore"
         options={{
