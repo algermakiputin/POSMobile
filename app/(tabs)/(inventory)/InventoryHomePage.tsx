@@ -6,7 +6,8 @@ import { GestureHandlerRootView, TouchableOpacity } from "react-native-gesture-h
 const InventoryHomePage = () => {
     const router = useRouter();
     const newItemButtonHandler = () => {
-        router.navigate('/(inventory)/NewItem');
+        router.navigate('/(inventory)/supplier/NewSupplier');
+        //router.navigate('/(inventory)/NewItem');
     }
 
     return (
@@ -15,7 +16,7 @@ const InventoryHomePage = () => {
                 <GestureHandlerRootView>
                     <View style={style.actionsContainer}>
                         <TouchableOpacity style={style.button} onPress={newItemButtonHandler}>
-                            <Text>Add Item</Text>
+                            <Text style={style.buttonText}>Add Item</Text>
                         </TouchableOpacity>
                     </View>
                 </GestureHandlerRootView>
@@ -115,7 +116,7 @@ const style = StyleSheet.create({
         marginBottom: 15
     },
     button: {
-        backgroundColor:'#A7F4FE', 
+        backgroundColor:'#006FFD',
         height:40, 
         width:125, 
         flex: 1, 
@@ -123,6 +124,12 @@ const style = StyleSheet.create({
         alignContent:'center', 
         alignItems:'center',
         borderRadius: 5
+    },
+    buttonText: {
+        color: '#fff',
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        fontSize: 14
     },
     productDetailsColumn: {
       

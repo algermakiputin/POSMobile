@@ -3,13 +3,14 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20
+        padding: 20,
+        flexDirection: 'column'
     },
     card: {
         backgroundColor: '#fff',
         padding: 20,
         borderRadius: 5,
-        marginBottom: 15
+        marginBottom: 15,
     },
     row: {
         flex: 1,
@@ -39,6 +40,20 @@ const styles = StyleSheet.create({
     },
     textDanger: {
         color: '#dc3545'
+    },
+    button: {
+        backgroundColor:'#A7F4FE', 
+        height:40, 
+        width:125,
+        justifyContent:'center', 
+        alignContent:'center', 
+        alignItems:'center',
+        borderRadius: 5
+    },
+    sectionHeader: {
+        fontWeight: 'bold',
+        fontSize: 18,
+        marginBottom: 15
     }
 });
 

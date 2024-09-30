@@ -1,13 +1,37 @@
 import { View, TextInput, ScrollView, Button, Text } from "react-native";
 import styles from '../../styles/style';
 import { useForm, Controller } from "react-hook-form";
-import { Fragment } from "react";
+import { SelectList } from "react-native-dropdown-select-list";
 
 const NewItem = () => {
     const { control, handleSubmit, formState: {errors} } = useForm();
     const submitHandler = (data: any) => {
         console.log(`data`, data);
     }
+
+    const data = [
+        {
+            key: 1, value: 'Foods',
+        },
+        {
+            key: 2, value: 'Soft Drinks',
+        },
+        {
+            key: 3, value: 'FISH',
+        },
+        {
+            key: 3, value: 'JUICE',
+        },
+        {
+            key: 3, value: 'SABON',
+        },
+        {
+            key: 3, value: 'CIGGARE',
+        },
+        {
+            key: 3, value: 'Alcohol',
+        },
+    ]
     
     return (
         <ScrollView>
@@ -52,12 +76,12 @@ const NewItem = () => {
                         control={control}
                         render={({field: {onChange, value, onBlur}}) => (
                             <View style={styles.formGroup}>
-                                <TextInput 
-                                    placeholder="Category" 
-                                    style={styles.input}
-                                    onBlur={onBlur}
-                                    value={value}
-                                    onChangeText={value => onChange(value)}
+                                <SelectList 
+                                    setSelected={(val: string) => (onChange(val))}
+                                    data={data}
+                                    save="value"
+                                    boxStyles={styles.input}
+                                    placeholder="Select Category"
                                 />
                                 { (errors as any)?.category?.message && <Text style={styles.textDanger}>{(errors as any)?.category?.message}</Text>}
                             </View>
@@ -69,12 +93,12 @@ const NewItem = () => {
                         control={control}
                         render={({field: {onChange, value, onBlur}}) => (
                             <View style={styles.formGroup}>
-                                <TextInput 
-                                    placeholder="Supplier" 
-                                    style={styles.input}
-                                    onBlur={onBlur}
-                                    value={value}
-                                    onChangeText={value => onChange(value)}
+                                <SelectList 
+                                    setSelected={(val: string) => (onChange(val))}
+                                    data={data}
+                                    save="value"
+                                    boxStyles={styles.input}
+                                    placeholder="Select Supplier"
                                 />
                                 { (errors as any)?.supplier?.message && <Text style={styles.textDanger}>{(errors as any)?.supplier?.message}</Text>}
                             </View>

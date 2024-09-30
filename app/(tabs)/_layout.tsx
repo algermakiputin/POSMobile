@@ -31,19 +31,31 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
           ),
-          headerTitle:'Helo'
+          headerTitle:'Helo',
+          headerShown: false
         }}
         >
       </Tabs.Screen>
       <Tabs.Screen
-        name="explore"
+        name='(sales)'
         options={{
-          title: 'Explore',
+          title: 'Sales',
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
           ),
+         
         }}
-      />
+        ></Tabs.Screen>
+      <Tabs.Screen
+        name='(orders)'
+        options={{
+          title: 'Orders',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          ),
+         
+        }}
+        ></Tabs.Screen>
     </Tabs>
   );
 }

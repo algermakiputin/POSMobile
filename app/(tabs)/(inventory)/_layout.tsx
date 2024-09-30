@@ -20,14 +20,32 @@ export default function InventoryLayout() {
           name="InventoryHomePage" 
           options={{ 
             headerShown: true,
-            headerTitle: 'Inventory'
+            headerTitle: 'Inventory',
+            headerTitleAlign:'center'
           }} 
           />
         <Stack.Screen 
           name="NewItem" 
           options={{ 
             headerShown: true,
-            headerTitle: 'New Item'
+            headerTitle: 'New Item',
+            headerTitleAlign:'center'
+          }} 
+          />
+        <Stack.Screen 
+          name="category/NewCategory" 
+          options={{ 
+            headerShown: true,
+            headerTitle: 'Add Category',
+            headerTitleAlign:'center'
+          }} 
+          />
+        <Stack.Screen 
+          name="supplier/NewSupplier" 
+          options={{ 
+            headerShown: true,
+            headerTitle: 'Add Supplier',
+            headerTitleAlign:'center'
           }} 
           />
       </Stack>
