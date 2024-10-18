@@ -1,14 +1,14 @@
-import { Icon, IconElement, List, ListItem, Button, Divider, Layout, Text } from "@ui-kitten/components";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { IconElement, List, ListItem, Divider, Layout, Text } from "@ui-kitten/components";
+import { View, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
 import CustomerSelectCard from "@/components/cards/CustomerSelectCard";
 import styles from "@/app/styles/style";
-
+import Button from "@/components/buttons/Button";
 interface IListItem {
     title: string;
     description: string;
   }
   
-  const data = new Array(20).fill({
+  const data = new Array(15).fill({
     title: 'Title for Item',
     description: 'Description for Item',
   });
@@ -24,7 +24,7 @@ const Summary = () => {
     const renderItemAccessory = (): React.ReactElement => (
         <Layout  style={style.quantity}>
             <TouchableOpacity>
-                <Icon name="star"/>
+                <Text>Star</Text>
             </TouchableOpacity>
             <Text>0</Text>
             <TouchableOpacity>
@@ -43,16 +43,28 @@ const Summary = () => {
       );
 
     return (
-        <View style={{padding:20}}>
+        // <SafeAreaView> 
+          <View style={{padding:20, flex:1, height:'100%', position:'relative'}}>
             <CustomerSelectCard /> 
+            <Divider style={{marginBottom:10}}/>
+            <View style={styles.flexColumns}>
+              <Text>Order List</Text>
+              <Text>Total Amount: $100</Text>
+            </View>
             <Divider style={{marginBottom:10, marginTop:10}}/>
-            <List
-                style={{marginBottom:70}}
-                data={data}
-                renderItem={renderItem}
-                ItemSeparatorComponent={Divider}
-            /> 
-        </View>
+            <Layout>
+              <List
+                  style={{marginBottom:15}}
+                  data={data}
+                  renderItem={renderItem}
+                  ItemSeparatorComponent={Divider}
+              />
+            </Layout>
+            <View style={styles.floatBottom}>
+              <Button />
+            </View>
+          </View> 
+        // </SafeAreaView>
     );
 }
 

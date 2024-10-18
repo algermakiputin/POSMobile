@@ -54,6 +54,19 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18,
         marginBottom: 15
+    },
+    flexColumns: {
+        display:'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    floatBottom: {
+        position: 'absolute', 
+        left: 0, 
+        right: 0, 
+        bottom: 10, 
+        justifyContent: 'center', 
+        alignItems: 'center'
     }
 });
 

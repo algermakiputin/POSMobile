@@ -1,7 +1,9 @@
-import { Button, Input, Layout, Text } from "@ui-kitten/components";
+import { Input, Layout, Text } from "@ui-kitten/components";
 import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import styles from "@/app/styles/style";
+import Button from "@/components/buttons/Button";
+
 const OrdersScreen = () => {
     const route = useRouter();
     const processOrderHandler = () => {
@@ -185,22 +187,9 @@ const OrdersScreen = () => {
                     </Layout>
                 </View>
             </ScrollView>
-            <TouchableOpacity 
-                onPress={processOrderHandler}
-                style={style.buttonWrapper}>
-                <View style={style.proceedButton}>
-                    <View>
-                        <Text>Process New Order</Text>
-                    </View>
-                    <View>
-                        <View style={{flex:1, flexDirection: 'row', alignItems: 'center'}}>
-                            <Text>3 items</Text>
-                            <Text>$100</Text>
-                            <Text>arrow</Text>
-                        </View>
-                    </View>
-                </View>
-            </TouchableOpacity>
+            <View style={styles.floatBottom}>
+                <Button onPressHandler={processOrderHandler} />
+            </View>
         </View>
     );
 }
