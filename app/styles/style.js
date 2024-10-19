@@ -74,6 +74,18 @@ const styles = StyleSheet.create({
     },
     textCenter: {
         textAlign: 'center'
+    },
+    quantityInputWrapper: {
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderRadius: 40,
+        borderColor: '#f4f4f5',
+        width: 35,
+        height: 25,
+        flex: 1,
+        maxHeight: 25,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 

@@ -1,9 +1,10 @@
-import { IconElement, List, ListItem, Divider, Layout, Text } from "@ui-kitten/components";
+import { List, ListItem, Divider, Layout, Text } from "@ui-kitten/components";
 import { View, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
 import CustomerSelectCard from "@/components/cards/CustomerSelectCard";
 import styles from "@/app/styles/style";
 import Button from "@/components/buttons/Button";
 import { useRouter } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 interface IListItem {
     title: string;
     description: string;
@@ -23,13 +24,17 @@ const Summary = () => {
       );
 
     const renderItemAccessory = (): React.ReactElement => (
-        <Layout  style={style.quantity}>
+        <Layout style={style.quantity}>
             <TouchableOpacity>
-                <Text>Star</Text>
+                <View style={styles.quantityInputWrapper}>
+                  <Ionicons name="add-outline" />
+                </View>
             </TouchableOpacity>
             <Text>0</Text>
             <TouchableOpacity>
-                <Text>+</Text>
+                <View style={styles.quantityInputWrapper}>
+                  <Ionicons name="remove-outline" />
+                </View>
             </TouchableOpacity>
         </Layout>
       );
@@ -55,10 +60,10 @@ const Summary = () => {
           <Text>Order List</Text>
           <Text>Total Amount: $100</Text>
         </View>
-        <Divider style={{marginBottom:10, marginTop:10}}/>
+        <Divider style={style.divider}/>
         <Layout>
           <List
-              style={{marginBottom:15}}
+              style={style.list}
               data={data}
               renderItem={renderItem}
               ItemSeparatorComponent={Divider}
@@ -78,6 +83,13 @@ const style = StyleSheet.create({
         justifyContent:'space-evenly', 
         alignItems: 'center'
     },
+    list: {
+      marginBottom: 15
+    },
+    divider: {
+      marginBottom:10, 
+      marginTop:10
+    }
 });
 
 export default Summary;
