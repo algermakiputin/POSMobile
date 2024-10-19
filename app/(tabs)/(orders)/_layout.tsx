@@ -28,6 +28,13 @@ export default function OrdersLayout() {
             headerTitleAlign: 'center'
           }}
         />
+        <Stack.Screen
+          name='receipt'
+          options={{
+            headerTitle: 'Receipt',
+            headerTitleAlign: 'center'
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );

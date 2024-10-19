@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from "re
 import CustomerSelectCard from "@/components/cards/CustomerSelectCard";
 import styles from "@/app/styles/style";
 import Button from "@/components/buttons/Button";
+import { useRouter } from "expo-router";
 interface IListItem {
     title: string;
     description: string;
@@ -14,7 +15,7 @@ interface IListItem {
   });
 
 const Summary = () => {
-
+    const route = useRouter();
     const renderItemIcon = (props: any) => (
         <View style={{height:55,width:55,backgroundColor:'#777', borderRadius:5}}>
 
@@ -32,6 +33,10 @@ const Summary = () => {
             </TouchableOpacity>
         </Layout>
       );
+    
+    const submitHandler = () => {
+      route.navigate('/(orders)/receipt');
+    }
 
     const renderItem = ({ item, index }: { item: IListItem; index: number }): React.ReactElement => (
         <ListItem
@@ -43,28 +48,26 @@ const Summary = () => {
       );
 
     return (
-        // <SafeAreaView> 
-          <View style={{padding:20, flex:1, height:'100%', position:'relative'}}>
-            <CustomerSelectCard /> 
-            <Divider style={{marginBottom:10}}/>
-            <View style={styles.flexColumns}>
-              <Text>Order List</Text>
-              <Text>Total Amount: $100</Text>
-            </View>
-            <Divider style={{marginBottom:10, marginTop:10}}/>
-            <Layout>
-              <List
-                  style={{marginBottom:15}}
-                  data={data}
-                  renderItem={renderItem}
-                  ItemSeparatorComponent={Divider}
-              />
-            </Layout>
-            <View style={styles.floatBottom}>
-              <Button />
-            </View>
-          </View> 
-        // </SafeAreaView>
+      <View style={{padding:20, flex:1, height:'100%', position:'relative'}}>
+        <CustomerSelectCard /> 
+        <Divider style={{marginBottom:10}}/>
+        <View style={styles.flexColumns}>
+          <Text>Order List</Text>
+          <Text>Total Amount: $100</Text>
+        </View>
+        <Divider style={{marginBottom:10, marginTop:10}}/>
+        <Layout>
+          <List
+              style={{marginBottom:15}}
+              data={data}
+              renderItem={renderItem}
+              ItemSeparatorComponent={Divider}
+          />
+        </Layout>
+        <View style={styles.floatBottom}>
+          <Button onPressHandler={submitHandler} />
+        </View>
+      </View>
     );
 }
 

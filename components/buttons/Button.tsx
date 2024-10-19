@@ -14,16 +14,16 @@ const Button = (Props: Props) => {
     return (
         <TouchableOpacity 
             onPress={processOrderHandler}
-            style={style.buttonWrapper}>
-            <View style={[styles.flexColumns, {backgroundColor: 'red', width:300}]}>
+            style={style.container}>
+            <View style={[styles.flexColumns, style.buttonWrapper]}>
                 <View>
-                    <Text>Process New Order</Text>
+                    <Text style={styles.textColorWhite}>Process New Order</Text>
                 </View>
                 <View>
                     <View style={styles.flexColumns}>
-                        <Text>3 items</Text>
-                        <Text>$100</Text>
-                        <Text>arrow</Text>
+                        <Text style={styles.textColorWhite}>3 items</Text>
+                        <Text style={styles.textColorWhite}>$100</Text>
+                        <Text style={styles.textColorWhite}>arrow</Text>
                     </View>
                 </View>
             </View>
@@ -32,21 +32,16 @@ const Button = (Props: Props) => {
 }
 
 const style = StyleSheet.create({
-    // proceedButton: {
-    //     // flex:1,
-    //     justifyContent: 'space-between',
-    //     width: '100%', 
-    //     backgroundColor: 'red',
-    //     flexDirection: 'row',
-    //     alignItems:'center',
-    //     padding: 10,
-    //     margin:'auto'
-    // },
+    container: {
+        paddingRight: 20, 
+        paddingLeft: 20
+    },
     buttonWrapper: {
-        // paddingLeft: 20, 
-        // paddingRight: 20,
-        // marginBottom:10, 
-        // height:50
+        padding:15,
+        backgroundColor:'#333', 
+        alignItems:'center',
+        width: '100%',
+        borderRadius: 5,
     }
 });
 

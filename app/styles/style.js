@@ -58,7 +58,8 @@ const styles = StyleSheet.create({
     flexColumns: {
         display:'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     floatBottom: {
         position: 'absolute', 
@@ -67,6 +68,12 @@ const styles = StyleSheet.create({
         bottom: 10, 
         justifyContent: 'center', 
         alignItems: 'center'
+    },
+    textColorWhite: {
+        color: "#ffffff"
+    },
+    textCenter: {
+        textAlign: 'center'
     }
 });
 
