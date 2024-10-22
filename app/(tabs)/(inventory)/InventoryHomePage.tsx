@@ -1,9 +1,14 @@
 import { useRouter } from "expo-router";
-import { Button, Text, View, ScrollView, StyleSheet } from "react-native";
+import { Text, View, ScrollView, StyleSheet } from "react-native";
 import styles from "@/app/styles/style";
 import { GestureHandlerRootView, TouchableOpacity } from "react-native-gesture-handler";
-import { Input } from "@ui-kitten/components";
+import { Input, Button, List } from "@ui-kitten/components";
 import { Ionicons } from "@expo/vector-icons";
+
+const data = new Array(8).fill({
+    title: 'Title for Item',
+    description: 'Description for Item',
+});
 
 const InventoryHomePage = () => {
     const router = useRouter();
@@ -16,6 +21,34 @@ const InventoryHomePage = () => {
         return <Ionicons name="search-outline" />
     }
 
+    const renderItemAccessory = (): React.ReactElement => (
+        <Button size='tiny'>
+    FOLLOW
+        </Button>
+      );
+    
+    const renderItemIcon = () => (
+        null
+    );
+
+    const renderItem = () => {
+        return (
+            <View style={styles.card}>
+                <Text style={style.itemTitle}>Surf Powder Bar With Fabcon</Text>
+                <View style={styles.row}>
+                    <View style={styles.col1}>
+                        <View style={style.itemAvatar}></View> 
+                    </View>
+                    <View style={[styles.col2, style.productDetailsColumn]}>
+                        <Text>Stocks: 24</Text>
+                        <Text>Supplier: J&B</Text>
+                        <Text>Category: Sabon</Text>
+                        <Text>Location: 1</Text>
+                    </View>
+                </View>
+            </View>
+        )
+    }
     return (
         <ScrollView>
             <View style={styles.container}> 
@@ -25,90 +58,11 @@ const InventoryHomePage = () => {
                         <Ionicons onPress={() => alert(0)} name="filter-outline" size={24} />
                     </View>
                 </View>
-                <View style={styles.card}>
-                    <Text style={style.itemTitle}>Surf Powder Bar With Fabcon</Text>
-                    <View style={styles.row}>
-                        <View style={styles.col1}>
-                            <View style={style.itemAvatar}></View> 
-                        </View>
-                        <View style={[styles.col2, style.productDetailsColumn]}>
-                            <Text>Stocks: 24</Text>
-                            <Text>Supplier: J&B</Text>
-                            <Text>Category: Sabon</Text>
-                            <Text>Location: 1</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.card}>
-                    <Text style={style.itemTitle}>Surf Powder Bar With Fabcon</Text>
-                    <View style={styles.row}>
-                        <View style={styles.col1}>
-                            <View style={style.itemAvatar}></View> 
-                        </View>
-                        <View style={[styles.col2, style.productDetailsColumn]}>
-                            <Text>Stocks: 24</Text>
-                            <Text>Supplier: J&B</Text>
-                            <Text>Category: Sabon</Text>
-                            <Text>Location: 1</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.card}>
-                    <Text style={style.itemTitle}>Surf Powder Bar With Fabcon</Text>
-                    <View style={styles.row}>
-                        <View style={styles.col1}>
-                            <View style={style.itemAvatar}></View> 
-                        </View>
-                        <View style={[styles.col2, style.productDetailsColumn]}>
-                            <Text>Stocks: 24</Text>
-                            <Text>Supplier: J&B</Text>
-                            <Text>Category: Sabon</Text>
-                            <Text>Location: 1</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.card}>
-                    <Text style={style.itemTitle}>Surf Powder Bar With Fabcon</Text>
-                    <View style={styles.row}>
-                        <View style={styles.col1}>
-                            <View style={style.itemAvatar}></View> 
-                        </View>
-                        <View style={[styles.col2, style.productDetailsColumn]}>
-                            <Text>Stocks: 24</Text>
-                            <Text>Supplier: J&B</Text>
-                            <Text>Category: Sabon</Text>
-                            <Text>Location: 1</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.card}>
-                    <Text style={style.itemTitle}>Surf Powder Bar With Fabcon</Text>
-                    <View style={styles.row}>
-                        <View style={styles.col1}>
-                            <View style={style.itemAvatar}></View> 
-                        </View>
-                        <View style={[styles.col2, style.productDetailsColumn]}>
-                            <Text>Stocks: 24</Text>
-                            <Text>Supplier: J&B</Text>
-                            <Text>Category: Sabon</Text>
-                            <Text>Location: 1</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.card}>
-                    <Text style={style.itemTitle}>Surf Powder Bar With Fabcon</Text>
-                    <View style={styles.row}>
-                        <View style={styles.col1}>
-                            <View style={style.itemAvatar}></View> 
-                        </View>
-                        <View style={[styles.col2, style.productDetailsColumn]}>
-                            <Text>Stocks: 24</Text>
-                            <Text>Supplier: J&B</Text>
-                            <Text>Category: Sabon</Text>
-                            <Text>Location: 1</Text>
-                        </View>
-                    </View>
-                </View>
+                <List
+                    style={styles.container}
+                    data={data}
+                    renderItem={renderItem}
+                />
             </View>
         </ScrollView>
     );
