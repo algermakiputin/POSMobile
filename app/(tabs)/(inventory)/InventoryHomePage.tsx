@@ -25,13 +25,6 @@ const InventoryHomePage = () => {
                         <Ionicons onPress={() => alert(0)} name="filter-outline" size={24} />
                     </View>
                 </View>
-                {/* <GestureHandlerRootView>
-                    <View style={style.actionsContainer}>
-                        <TouchableOpacity style={style.button} onPress={newItemButtonHandler}>
-                            <Text style={style.buttonText}>Add Item</Text>
-                        </TouchableOpacity>
-                    </View>
-                </GestureHandlerRootView> */}
                 <View style={styles.card}>
                     <Text style={style.itemTitle}>Surf Powder Bar With Fabcon</Text>
                     <View style={styles.row}>
