@@ -21,77 +21,10 @@ const SalesScreen = () => {
         />
     );
 
-    const data = [
-        {
+    const data = new Array(10).fill({
             title: "1x Dandelion Juice",
             description: 'PHP 18'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        },
-        {
-            title: "test title",
-            description: 'test description'
-        }
-
-    ];
+        });
 
     return (
         <Fragment>
@@ -99,7 +32,7 @@ const SalesScreen = () => {
                 <Text>Total Sales (Today)</Text>
                 <Text>19,500</Text>
             </View>
-            <View style={styles.container}>
+            <View style={styles.container}> 
                 <Text style={[styles.sectionHeader]}>Recent Transaction</Text>
                 <List
                     style={{}}

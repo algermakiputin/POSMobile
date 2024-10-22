@@ -2,6 +2,8 @@ import { useRouter } from "expo-router";
 import { Button, Text, View, ScrollView, StyleSheet } from "react-native";
 import styles from "@/app/styles/style";
 import { GestureHandlerRootView, TouchableOpacity } from "react-native-gesture-handler";
+import { Input } from "@ui-kitten/components";
+import { Ionicons } from "@expo/vector-icons";
 
 const InventoryHomePage = () => {
     const router = useRouter();
@@ -9,17 +11,27 @@ const InventoryHomePage = () => {
         router.navigate('/(inventory)/supplier/NewSupplier');
         //router.navigate('/(inventory)/NewItem');
     }
+    
+    const renderSearchIcon = () => {
+        return <Ionicons name="search-outline" />
+    }
 
     return (
         <ScrollView>
             <View style={styles.container}> 
-                <GestureHandlerRootView>
+                <View style={{marginBottom:10, flex:1, flexDirection: 'row'}}>
+                    <Input accessoryLeft={renderSearchIcon} style={{width:'auto', flex:1}}/>
+                    <View style={{width:50, justifyContent: 'center', alignItems: 'center'}}>
+                        <Ionicons onPress={() => alert(0)} name="filter-outline" size={24} />
+                    </View>
+                </View>
+                {/* <GestureHandlerRootView>
                     <View style={style.actionsContainer}>
                         <TouchableOpacity style={style.button} onPress={newItemButtonHandler}>
                             <Text style={style.buttonText}>Add Item</Text>
                         </TouchableOpacity>
                     </View>
-                </GestureHandlerRootView>
+                </GestureHandlerRootView> */}
                 <View style={styles.card}>
                     <Text style={style.itemTitle}>Surf Powder Bar With Fabcon</Text>
                     <View style={styles.row}>
