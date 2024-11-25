@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
         padding: 20,
         flexDirection: 'column'
     },
+    flex: {
+        flex: 1,
+    },
     card: {
         backgroundColor: '#fff',
         padding: 20,

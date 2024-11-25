@@ -52,9 +52,9 @@ const InventoryHomePage = () => {
     return (
         <ScrollView>
             <View style={styles.container}> 
-                <View style={{marginBottom:10, flex:1, flexDirection: 'row'}}>
-                    <Input accessoryLeft={renderSearchIcon} style={{width:'auto', flex:1}}/>
-                    <View style={{width:50, justifyContent: 'center', alignItems: 'center'}}>
+                <View style={style.filterWrapper}>
+                    <Input accessoryLeft={renderSearchIcon} style={style.filterLeft}/>
+                    <View style={style.filterRight}>
                         <Ionicons onPress={() => alert(0)} name="filter-outline" size={24} />
                     </View>
                 </View>
@@ -103,6 +103,20 @@ const style = StyleSheet.create({
         width:85,
         backgroundColor:'#ddd',
         borderRadius: 5
+    },
+    filterWrapper: {
+        marginBottom:10, 
+        flex:1, 
+        flexDirection: 'row'
+    },
+    filterLeft: {
+        width:'auto', 
+        flex:1
+    },
+    filterRight: {
+        width:50, 
+        justifyContent: 'center', 
+        alignItems: 'center'
     }
 });
 
