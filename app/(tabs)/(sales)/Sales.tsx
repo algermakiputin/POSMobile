@@ -2,7 +2,8 @@ import { StyleSheet, View } from "react-native";
 import styles from "@/app/styles/style";
 import { Button, IconElement, List, ListItem, Layout, Text, Divider, } from '@ui-kitten/components';
 import { Fragment } from "react";
-const SalesScreen = () => {
+
+const Sales = () => {
 
     const renderItemAccessory = (): React.ReactElement => (
         <Text>2022-10-10</Text>
@@ -61,4 +62,4 @@ const style = StyleSheet.create({
     }
 });
 
-export default SalesScreen;
+export default Sales;

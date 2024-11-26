@@ -17,7 +17,7 @@ export default function SalesLayout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack screenOptions={{headerShown: false}}>
         <Stack.Screen 
-          name="index" 
+          name="Sales" 
           // options={{ 
           //   headerShown: true,
           //   headerTitle: 'Sales',

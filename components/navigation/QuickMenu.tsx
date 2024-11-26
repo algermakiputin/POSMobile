@@ -40,7 +40,7 @@ const QuickMenu = () => {
                     </TouchableOpacity>
                 </Layout>
                 <Layout style={[styles.flex]}>
-                    <TouchableOpacity onPress={() => menuPressHandler('index' as any)}>
+                    <TouchableOpacity onPress={() => menuPressHandler(routeTypes.orders)}>
                         <View style={[styles.flexCenter, localStyles.menu]}>
                             <Ionicons name="calculator-outline" size={20}/>
                             <Text style={localStyles.label}>New Order</Text>

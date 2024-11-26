@@ -15,9 +15,9 @@ export default function OrdersLayout() {
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack screenOptions={{headerShown: true}}>
         <Stack.Screen 
-          name="index"
+          name="Orders"
           options={{
-            headerTitle: 'Order',
+            headerTitle: 'Orders',
             headerTitleAlign: 'center'
           }}
           />

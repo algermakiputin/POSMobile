@@ -3,6 +3,6 @@ export enum routes {
     newSupplier = "NewSupplier",
     inventory = "InventoryHomePage",
     newItem = "NewItem",
-    sales = "(sales)/index",
-    orders = "Orders/HomePage"
+    sales = "Sales",
+    orders = "Orders"
 };

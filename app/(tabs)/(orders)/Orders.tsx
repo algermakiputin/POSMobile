@@ -4,7 +4,7 @@ import { useRouter } from "expo-router";
 import styles from "@/app/styles/style";
 import Button from "@/components/buttons/Button";
 
-const OrdersScreen = () => {
+const Orders = () => {
     const route = useRouter();
     const processOrderHandler = () => {
         route.navigate('/(orders)/summary');
@@ -244,4 +244,4 @@ const style = StyleSheet.create({
     }
 });
 
-export default OrdersScreen;
+export default Orders;
