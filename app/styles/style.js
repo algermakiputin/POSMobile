@@ -9,6 +9,10 @@ const styles = StyleSheet.create({
     flex: {
         flex: 1,
     },
+    flexCenter: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },  
     card: {
         backgroundColor: '#fff',
         padding: 20,

@@ -14,7 +14,6 @@ const InventoryHomePage = () => {
     const router = useRouter();
     const newItemButtonHandler = () => {
         router.navigate('/(inventory)/supplier/NewSupplier');
-        //router.navigate('/(inventory)/NewItem');
     }
     
     const renderSearchIcon = () => {
