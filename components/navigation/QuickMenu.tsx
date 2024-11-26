@@ -16,7 +16,7 @@ const QuickMenu = () => {
             <Text>Quick Menu</Text>
             <Layout style={styles.row}>
                 <Layout style={[styles.flex]}>
-                    <TouchableOpacity onPress={() => menuPressHandler("NewCategory" as any)}>
+                    <TouchableOpacity onPress={() => menuPressHandler(routeTypes.newCategory)}>
                         <View style={[styles.flexCenter, localStyles.menu]}>
                             <Ionicons name="grid-outline" size={20}/>
                             <Text style={localStyles.label}>Categories</Text>

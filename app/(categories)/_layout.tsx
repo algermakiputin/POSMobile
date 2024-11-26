@@ -16,19 +16,11 @@ export default function CategoriesLayout() {
   return (
     <Fragment> 
       <Stack>
-        <Stack.Screen name="Categories" options={{ 
-            headerShown: false, 
-            headerTitle: 'Categories', 
-            title: 'Categories qweqwe',
-            headerBackTitle: 'back now men',
-            headerTitleAlign: 'center'
-            }} />
+        <Stack.Screen name="Categories" options={{
+          headerTitle: "Categories"
+        }} />
         <Stack.Screen name="NewCategory" options={{ 
-            headerShown: false, 
-            headerTitle: 'Categories', 
-            title: 'Categories qweqwe',
-            headerBackTitle: 'back now men',
-            headerTitleAlign: 'center'
+            headerTitle: 'New Category',  
             }} />
       </Stack> 
     </Fragment>
