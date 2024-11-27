@@ -1,9 +1,17 @@
 import { useRouter } from "expo-router";
-import { Text, View, ScrollView, StyleSheet } from "react-native";
+import { Text, View, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 import styles from "@/app/styles/style";
-import { GestureHandlerRootView, TouchableOpacity } from "react-native-gesture-handler";
-import { Input, Button, List } from "@ui-kitten/components";
+import { Input, Button, List, Layout, OverflowMenu, MenuItem } from "@ui-kitten/components";
 import { Ionicons } from "@expo/vector-icons";
+import { useState } from "react";
+import {
+    Menu,
+    MenuOptions,
+    MenuOption,
+    MenuTrigger,
+    renderers
+} from 'react-native-popup-menu';
+
 
 const data = new Array(8).fill({
     title: 'Title for Item',
@@ -15,7 +23,7 @@ const InventoryHomePage = () => {
     const newItemButtonHandler = () => {
         router.navigate('/(inventory)/supplier/NewSupplier');
     }
-    
+    const { SlideInMenu, ContextMenu } = renderers;
     const renderSearchIcon = () => {
         return <Ionicons name="search-outline" />
     }
@@ -43,31 +51,47 @@ const InventoryHomePage = () => {
                         <Text>Supplier: J&B</Text>
                         <Text>Category: Sabon</Text>
                         <Text>Location: 1</Text>
-                    </View>
-                </View>
+                    </View> 
+                </View> 
+                <Menu renderer={ContextMenu} style={{width:20, position:'absolute', right: 10, bottom:20}}>
+                    <MenuTrigger >
+                        <Ionicons name="ellipsis-vertical-outline" size={18} />
+                    </MenuTrigger>
+                    <MenuOptions>
+                        <MenuOption onSelect={() => alert(`Save`)} text='View' />
+                        <MenuOption onSelect={() => alert(`Save`)} text='Edit' />
+                        <MenuOption onSelect={() => alert(`Delete`)} >
+                            <Text style={{color: 'red'}}>Delete</Text>
+                        </MenuOption>
+                    </MenuOptions>
+                </Menu>
             </View>
         )
     }
-    return (
-        <ScrollView>
-            <View style={styles.container}> 
-                <View style={style.filterWrapper}>
-                    <Input accessoryLeft={renderSearchIcon} style={style.filterLeft}/>
-                    <View style={style.filterRight}>
-                        <Ionicons onPress={() => alert(0)} name="filter-outline" size={24} />
-                    </View>
+    return ( 
+        <View style={styles.container}> 
+            <View style={style.filterWrapper}>
+                <Input accessoryLeft={renderSearchIcon} style={style.filterLeft}/>
+                <View style={style.filterRight}>
+                    <Ionicons onPress={() => alert(0)} name="filter-outline" size={24} />
                 </View>
-                <List
-                    style={styles.container}
-                    data={data}
-                    renderItem={renderItem}
-                />
             </View>
-        </ScrollView>
+            <List
+                style={{backgroundColor: 'transparent'}}
+                data={data}
+                renderItem={renderItem}
+            />
+        </View>
     );
 }
 
 const style = StyleSheet.create({
+    container: {
+    // minHeight: 144,
+    },
+    backdrop: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
     actionsContainer: {
         display:'flex', 
         alignItems: 'flex-end',
@@ -104,18 +128,18 @@ const style = StyleSheet.create({
         borderRadius: 5
     },
     filterWrapper: {
-        marginBottom:10, 
-        flex:1, 
-        flexDirection: 'row'
+        marginBottom:15, 
+        flexDirection: 'row',
+        display: 'flex'
     },
     filterLeft: {
         width:'auto', 
         flex:1
     },
     filterRight: {
-        width:50, 
+        width:40, 
         justifyContent: 'center', 
-        alignItems: 'center'
+        alignItems: 'center',
     }
 });
 
