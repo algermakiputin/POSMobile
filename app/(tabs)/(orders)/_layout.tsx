@@ -17,7 +17,7 @@ export default function OrdersLayout() {
         <Stack.Screen 
           name="Orders"
           options={{
-            headerTitle: 'Orders',
+            headerTitle: 'New Order',
             headerTitleAlign: 'center'
           }}
           />

@@ -18,10 +18,9 @@ interface IListItem {
 const Summary = () => {
     const route = useRouter();
     const renderItemIcon = (props: any) => (
-        <View style={{height:55,width:55,backgroundColor:'#777', borderRadius:5}}>
-
-        </View>
-      );
+      <View style={{height:55,width:55,backgroundColor:'#777', borderRadius:5}}>
+      </View>
+    );
 
     const renderItemAccessory = (): React.ReactElement => (
         <Layout style={style.quantity}>
@@ -70,7 +69,7 @@ const Summary = () => {
           />
         </Layout>
         <View style={styles.floatBottom}>
-          <Button onPressHandler={submitHandler} />
+          <Button onPressHandler={submitHandler} title="Complete Order"/>
         </View>
       </View>
     );

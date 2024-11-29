@@ -2,9 +2,11 @@ import { TouchableOpacity } from "react-native";
 import { View, StyleSheet } from "react-native";
 import { Text } from "@ui-kitten/components";
 import styles from "@/app/styles/style";
+import { Ionicons } from "@expo/vector-icons";
 
 type Props = {
     onPressHandler?: () => void;
+    title?: string;
 }
 
 const Button = (Props: Props) => {
@@ -17,13 +19,13 @@ const Button = (Props: Props) => {
             style={style.container}>
             <View style={[styles.flexColumns, style.buttonWrapper]}>
                 <View>
-                    <Text style={styles.textColorWhite}>Process New Order</Text>
+                    <Text style={styles.textColorWhite}>{Props.title}</Text>
                 </View>
                 <View>
                     <View style={styles.flexColumns}>
-                        <Text style={styles.textColorWhite}>3 items</Text>
-                        <Text style={styles.textColorWhite}>$100</Text>
-                        <Text style={styles.textColorWhite}>arrow</Text>
+                        <Text style={style.textItemQuantity}>3 items</Text>
+                        <Text style={style.textAmount}>$100</Text>
+                        <Ionicons name="arrow-forward-outline"  size={18} color={'#fff'}/>
                     </View>
                 </View>
             </View>
@@ -42,6 +44,18 @@ const style = StyleSheet.create({
         alignItems:'center',
         width: '100%',
         borderRadius: 5,
+    },
+    textItemQuantity: {
+        fontSize: 13,
+        fontWeight: 300,
+        color: '#fff',
+        marginRight: 5
+    },
+    textAmount: {
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: 700,
+        marginRight: 10
     }
 });
 
