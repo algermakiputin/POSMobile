@@ -1,9 +1,11 @@
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View, Dimensions } from "react-native";
 import styles from "@/app/styles/style";
-import { Button, IconElement, List, ListItem, Layout, Text, Divider, } from '@ui-kitten/components';
+import { Button, IconElement, List, ListItem, Layout, Text, Divider, SelectItem, Select } from '@ui-kitten/components';
 import { Fragment } from "react";
+import Dropdown from "@/components/dropdown/Dropdown";
 
 const Sales = () => {
+    const { width } = Dimensions.get('window');
 
     const renderItemAccessory = (): React.ReactElement => (
         <Text>2022-10-10</Text>
@@ -23,29 +25,88 @@ const Sales = () => {
     );
 
     const data = new Array(10).fill({
-            title: "1x Dandelion Juice",
-            description: 'PHP 18'
-        });
+        title: "1x Dandelion Juice",
+        description: 'PHP 18'
+    });
+
+    const dropdownData = [{title: 'Today'}, {title: 'Yesterday'}, {title: 'This Month'}, {title: 'Last Month'}];
 
     return (
         <Fragment>
-            <View style={style.cardWrapper}>
-                <Text>Total Sales (Today)</Text>
-                <Text>19,500</Text>
+            <View style={{padding: 20}}>
+                <View style={[style.statisticsContainer]}>
+                    <View style={[style.statisticHeader, { width: width - 60 }]}>
+                        <Layout style={[style.flexContainer, {backgroundColor: 'red', marginBottom: 10}]}>
+                            <Layout style={[styles.flex, {justifyContent: 'center'}]}>
+                                <Text style={{fontWeight: 'black'}}>Statistics</Text>
+                            </Layout>
+                            <Layout style={[styles.flex, {alignItems: 'flex-end', justifyContent: 'center'}]} level="1">
+                                <Dropdown data={dropdownData} />
+                            </Layout>
+                        </Layout>
+                    </View>
+                    <ScrollView horizontal={true}>
+                        <Layout style={styles.row}>
+                            <Layout style={style.flexItem}>
+                                <Text style={style.columnLabel}>Total Earnings</Text>
+                                <Text style={style.amountLabel}>1,000,000</Text>
+                            </Layout>
+                            <Layout style={style.flexItem}>
+                                <Text style={style.columnLabel}>Item Sold</Text>
+                                <Text style={style.amountLabel}>590</Text>
+                            </Layout>
+                            <Layout style={style.flexItem}>
+                                <Text style={style.columnLabel}>Net Sales</Text>
+                                <Text style={style.amountLabel}>10,000,000.00</Text>
+                            </Layout>
+                        </Layout>
+                    </ScrollView>
+                </View> 
             </View>
-            <View style={styles.container}> 
-                <Text style={[styles.sectionHeader]}>Recent Transaction</Text>
-                <List
-                    style={{}}
-                    data={data}
-                    renderItem={renderItem}
-                />
+            <View style={[styles.container, {borderRadius: 10}]}>
+                <Layout>
+                    <Text style={[styles.sectionHeader, {paddingLeft: 15,paddingTop:15}]}>Recent Transaction</Text>
+                    <Divider/>
+                    <List
+                        style={{}}
+                        data={data}
+                        renderItem={renderItem}
+                    />
+                </Layout>
             </View>
         </Fragment>
     );
 }
 
 const style = StyleSheet.create({
+    amountLabel: {
+        fontSize: 20,
+        fontWeight: 700
+    },
+    flexItem: {
+        flex: 1,
+        paddingRight: 20,
+        paddingBottom: 15,
+        flexBasis: 'auto'
+    },
+    columnLabel: {
+        fontSize: 14,
+        fontWeight: 'light'
+    },
+    statisticsContainer: {
+        padding: 20,
+        backgroundColor: '#fff',
+        paddingBottom: 0,
+        width:'130%'
+    },
+    statisticHeader: { 
+        display: 'flex', 
+        justifyContent: 'center'
+    },
+    flexContainer: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
     cardWrapper: {
         flex: 1, 
         alignItems: 'center', 

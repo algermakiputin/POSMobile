@@ -11,6 +11,7 @@ import {
     MenuTrigger,
     renderers
 } from 'react-native-popup-menu';
+import { routes } from "@/app/types/routes";
 
 
 const data = new Array(8).fill({
@@ -19,24 +20,11 @@ const data = new Array(8).fill({
 });
 
 const InventoryHomePage = () => {
-    const router = useRouter();
-    const newItemButtonHandler = () => {
-        router.navigate('/(inventory)/supplier/NewSupplier');
-    }
+    const router = useRouter(); 
     const { SlideInMenu, ContextMenu } = renderers;
     const renderSearchIcon = () => {
         return <Ionicons name="search-outline" />
-    }
-
-    const renderItemAccessory = (): React.ReactElement => (
-        <Button size='tiny'>
-    FOLLOW
-        </Button>
-      );
-    
-    const renderItemIcon = () => (
-        null
-    );
+    } 
 
     const renderItem = () => {
         return (
@@ -59,7 +47,7 @@ const InventoryHomePage = () => {
                     </MenuTrigger>
                     <MenuOptions>
                         <MenuOption onSelect={() => alert(`Save`)} text='View' />
-                        <MenuOption onSelect={() => alert(`Save`)} text='Edit' />
+                        <MenuOption onSelect={() => router.navigate({pathname: routes.editItem as any})}  text="Edit"/>
                         <MenuOption onSelect={() => alert(`Delete`)} >
                             <Text style={{color: 'red'}}>Delete</Text>
                         </MenuOption>

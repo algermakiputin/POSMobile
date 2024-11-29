@@ -31,6 +31,14 @@ export default function InventoryLayout() {
               headerTitleAlign:'center'
             }} 
             /> 
+          <Stack.Screen 
+            name={routes.editItem}
+            options={{ 
+              headerShown: true,
+              headerTitle: 'Edit Item',
+              headerTitleAlign:'center'
+            }} 
+            />
         </Stack>
       </ThemeProvider>
     </MenuProvider>

@@ -3,6 +3,7 @@ export enum routes {
     newSupplier = "NewSupplier",
     inventory = "InventoryHomePage",
     newItem = "NewItem",
+    editItem = "EditItem",
     sales = "Sales",
     orders = "Orders"
 };

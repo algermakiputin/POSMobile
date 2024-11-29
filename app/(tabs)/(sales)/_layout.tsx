@@ -18,11 +18,11 @@ export default function SalesLayout() {
       <Stack screenOptions={{headerShown: false}}>
         <Stack.Screen 
           name="Sales" 
-          // options={{ 
-          //   headerShown: true,
-          //   headerTitle: 'Sales',
-          //   headerTitleAlign:'center'
-          // }} 
+          options={{ 
+            headerShown: true,
+            headerTitle: 'Sales',
+            headerTitleAlign:'center'
+          }} 
           />
       </Stack>
     </ThemeProvider>
