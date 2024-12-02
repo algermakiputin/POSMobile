@@ -4,6 +4,7 @@ export enum routes {
     inventory = "InventoryHomePage",
     newItem = "NewItem",
     editItem = "EditItem",
+    itemFilter = "ItemFilter",
     sales = "Sales",
     orders = "Orders"
 };

@@ -5,12 +5,27 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { routes } from '@/app/types/routes';
 import { MenuProvider } from 'react-native-popup-menu';
+import { TouchableOpacity, View } from 'react-native';
+import { Text } from '@ui-kitten/components';
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function InventoryLayout() {
   const colorScheme = useColorScheme();
 
+  const filterHeaderRightHandler = () => {
+    alert('Applying...');
+  };
+
+  const filterHeaderRight = () => {
+    return (
+      <TouchableOpacity onPress={filterHeaderRightHandler}>
+        <View>
+          <Text>Apply</Text>
+        </View>
+      </TouchableOpacity>
+    )
+  }
   return (
     <MenuProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -37,6 +52,15 @@ export default function InventoryLayout() {
               headerShown: true,
               headerTitle: 'Edit Item',
               headerTitleAlign:'center'
+            }} 
+            />
+          <Stack.Screen 
+            name={routes.itemFilter}
+            options={{ 
+              headerShown: true,
+              headerTitle: 'Filter Item',
+              headerTitleAlign:'center',
+              headerRight: filterHeaderRight,
             }} 
             />
         </Stack>

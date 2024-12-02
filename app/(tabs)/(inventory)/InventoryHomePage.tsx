@@ -1,18 +1,10 @@
 import { useRouter } from "expo-router";
-import { Text, View, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import styles from "@/app/styles/style";
-import { Input, Button, List, Layout, OverflowMenu, MenuItem } from "@ui-kitten/components";
+import { Input, List} from "@ui-kitten/components";
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-    renderers
-} from 'react-native-popup-menu';
+import { Menu, MenuOptions, MenuOption, MenuTrigger, renderers } from 'react-native-popup-menu';
 import { routes } from "@/app/types/routes";
-
 
 const data = new Array(8).fill({
     title: 'Title for Item',
@@ -21,10 +13,14 @@ const data = new Array(8).fill({
 
 const InventoryHomePage = () => {
     const router = useRouter(); 
-    const { SlideInMenu, ContextMenu } = renderers;
+    const { ContextMenu } = renderers;
     const renderSearchIcon = () => {
         return <Ionicons name="search-outline" />
     } 
+
+    const filterButtonHandler = () => {
+        router.navigate({pathname: routes.itemFilter as any});
+    }
 
     const renderItem = () => {
         return (
@@ -57,11 +53,13 @@ const InventoryHomePage = () => {
         )
     }
     return ( 
-        <View style={styles.container}> 
+        <View style={styles.container}>
             <View style={style.filterWrapper}>
                 <Input accessoryLeft={renderSearchIcon} style={style.filterLeft}/>
                 <View style={style.filterRight}>
-                    <Ionicons onPress={() => alert(0)} name="filter-outline" size={24} />
+                    <TouchableOpacity onPress={filterButtonHandler}>
+                        <Ionicons name="filter-outline" size={24} />
+                    </TouchableOpacity>
                 </View>
             </View>
             <List
