@@ -14,7 +14,9 @@ const Orders = () => {
     const renderItem = () => {
         return (
             <Layout style={[style.item]}>
-                <Layout  style={[style.layout, style.avatar]}></Layout>
+                <Layout  style={[style.layout, style.avatar]}>
+                    <Ionicons name="image-outline" size={30} style={{color: '#ccc'}}/>
+                </Layout>
                 <Layout  style={[style.layout, {padding: 10, alignItems:'flex-start'}]}>
                     <Text>Part Number Coke</Text>
                     <Text>$100</Text>
@@ -42,23 +44,33 @@ const Orders = () => {
                     <ScrollView  horizontal={true} >
                         <Layout style={[style.categoriesWrapper, {flex:1, flexDirection: 'row', padding: 10}]}>
                             <View style={style.category}> 
+                                <Ionicons name="grid-outline" style={style.categoryIcon} size={14} />
+                                <Text>Foods</Text>
                             </View>
-                            <View style={style.category}>
-
+                            <View style={style.category}> 
+                                <Ionicons name="grid-outline" style={style.categoryIcon} size={14}/>
+                                <Text>Liquor</Text>
                             </View>
-                            <View style={style.category}>
-
+                            <View style={style.category}> 
+                                <Ionicons name="grid-outline" style={style.categoryIcon} size={14}/>
+                                <Text>Drinks</Text>
                             </View>
-                            <View style={style.category}>
-
+                            <View style={style.category}> 
+                                <Ionicons name="grid-outline" style={style.categoryIcon} size={14}/>
+                                <Text>Frozen</Text>
                             </View>
-                            <View style={style.category}>
-
+                            <View style={style.category}> 
+                                <Ionicons name="grid-outline" style={style.categoryIcon} size={14}/>
+                                <Text>Fish</Text>
                             </View>
-                            <View style={style.category}>
-
+                            <View style={style.category}> 
+                                <Ionicons name="grid-outline" style={style.categoryIcon} size={14}/>
+                                <Text>Soft Drinks</Text>
                             </View>
-                            
+                            <View style={style.category}> 
+                                <Ionicons name="grid-outline" style={style.categoryIcon} size={14}/>
+                                <Text>Detergents</Text>
+                            </View>
                         </Layout>
                         
                     </ScrollView>
@@ -67,10 +79,9 @@ const Orders = () => {
             <View style={styles.container}>
                 <List
                     style={{backgroundColor: 'transparent'}}
-                    data={[{}]}
+                    data={new Array(10).fill({title: 'Alger'})}
                     renderItem={renderItem}
-                /> 
-                 
+                />
             </View> 
             <View style={styles.floatBottom}>
                 <Button onPressHandler={processOrderHandler} title="Proceed New Order"/>
@@ -80,11 +91,23 @@ const Orders = () => {
 }
 
 const style = StyleSheet.create({
+    categoryIcon: {
+        backgroundColor: '#f4f4f5',
+        padding: 10,
+        borderRadius: 100,
+        marginBottom: 3,
+    },
     category: {
-        minHeight: 80,
-        backgroundColor: '#ddd',
-        width: 110,
-        marginRight: 10
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderWidth: 1,
+        borderColor: '#ddd',
+        borderRadius: 15,
+        width: 85,
+        marginRight: 10,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     categoriesWrapper: {
     
@@ -99,12 +122,11 @@ const style = StyleSheet.create({
     avatar: {
         width: 75,
         backgroundColor: '#ddd',
-        height: 75
+        height: 75,
     },
     layout: {
         justifyContent: 'center',
         alignItems: 'center',
-      
     },
     quantity: {
         flex: 1, 

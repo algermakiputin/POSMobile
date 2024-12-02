@@ -1,19 +1,27 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Text } from "@ui-kitten/components";
+import { Ionicons } from "@expo/vector-icons";
 const CustomerSelectCard = () => {
+    const editButtonHandler = () => {
+        alert('editing');
+    }
     return (
         <View style={{height:60}}>
             <View style={style.customerWrapper}>
                 <View style={{flex:1, flexDirection:'row', alignItems: 'center'}}>
-                    <View style={style.avatar}></View>
+                    <View style={style.avatar}>
+                        <Ionicons name="person-circle-outline" size={26} />
+                    </View>
                     <View style={style.customerDetails}>
                         <Text>Customer</Text>
                         <Text>Alger</Text>
                     </View>
                 </View>
-                <View style={{flex:1, alignItems: 'center', justifyContent:'center'}}>
-                    <Text>Edit Me</Text>
-                </View>
+                <TouchableOpacity onPress={editButtonHandler}>
+                    <View style={{flex:1, alignItems: 'flex-end', justifyContent:'center'}}>
+                        <Text>Edit <Ionicons name="create-outline" /></Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -23,15 +31,17 @@ const style = StyleSheet.create({
     customerWrapper: {
         backgroundColor: '#fff',
         borderRadius:5,
-        height:60,
         flex:1,
         flexDirection:'row',
         justifyContent:'space-between',
+        padding: 20,
+       
     },
     avatar: {
-        height:60,
-        width:60,
-        backgroundColor: '#ddd'
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 26,
+        width: 26
     },
     customerDetails: {
         marginLeft: 10

@@ -57,7 +57,7 @@ const Summary = () => {
         <Divider style={{marginBottom:10}}/>
         <View style={styles.flexColumns}>
           <Text>Order List</Text>
-          <Text>Total Amount: $100</Text>
+          <Text>Total Amount: <Text style={{fontWeight: 700, fontSize: 20}}>$100</Text></Text>
         </View>
         <Divider style={style.divider}/>
         <Layout>
