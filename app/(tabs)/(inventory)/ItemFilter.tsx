@@ -1,27 +1,61 @@
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Text, Divider, Layout, CheckBox } from "@ui-kitten/components";
+import { Text, Divider } from "@ui-kitten/components";
 const ItemFilter = () => {
+    const categories = ['Drinks', 'Detergents', 'Fish', 'Frozen Meat', 'Candy', 'Beverage', 'Alcohol', 'Medicine', 'Load'];
+    const suppliers = ['J&T', 'ABS-FISH', 'MAGNOLIA', 'Jupiter', 'Mars', 'Venus', 'Sun & Moon'];
     return ( 
         <View style={localStyle.container}>
-            <View style={localStyle.filterWrapper}>
-                <Text style={localStyle.filterHeader}>Category</Text>
-                <Divider />
-                <View style={{display: 'flex', flexDirection: 'row', justifyContent:'space-between'}}>
-                    <View>  
-                    </View>
-                    <View>
-                        <Text>Hello</Text>
-                    </View>
-                    <View>
-                        <Text>Hello</Text>
+            <ScrollView>
+                <View style={localStyle.filterWrapper}>
+                    <Text style={localStyle.filterHeader}>Category</Text>
+                    <Divider style={localStyle.divider}/>
+                    <View style={localStyle.filterContainer}>
+                        {
+                            categories.map((category: string) => (
+                                <View style={localStyle.labelContainer}>
+                                    <Text>{category}</Text>
+                                </View>
+                            ))
+                        }
                     </View>
                 </View>
-            </View>
+                <Divider style={localStyle.divider}/>
+                <View style={localStyle.filterWrapper}>
+                    <Text style={localStyle.filterHeader}>Supplier</Text>
+                    <Divider style={localStyle.divider}/>
+                    <View style={localStyle.filterContainer}>
+                        {
+                            categories.map((category: string) => (
+                                <View style={localStyle.labelContainer}>
+                                    <Text>{category}</Text>
+                                </View>
+                            ))
+                        }
+                    </View>
+                </View>
+                <Divider style={localStyle.divider} />
+            </ScrollView>
         </View> 
     );
 }
 
 const localStyle = StyleSheet.create({
+    divider: {
+        marginBottom: 15
+    },
+    filterContainer: {
+        display: 'flex', 
+        flexDirection: 'row', 
+        justifyContent:'space-between', 
+        flexWrap: 'wrap'
+    },
+    labelContainer: {
+        borderRadius: 10,
+        borderWidth: 1,
+        padding: 10,
+        borderColor: '#f4f4f5',
+        marginBottom: 5
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
@@ -32,7 +66,7 @@ const localStyle = StyleSheet.create({
     },
     filterHeader: {
         fontWeight: 700,
-        marginBottom: 10
+        marginBottom: 15
     },
     filterWrapper: {
         marginBottom: 20

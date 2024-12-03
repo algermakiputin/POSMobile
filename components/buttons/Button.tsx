@@ -1,7 +1,7 @@
 import { TouchableOpacity } from "react-native";
 import { View, StyleSheet } from "react-native";
 import { Text } from "@ui-kitten/components";
-import styles from "@/app/styles/style";
+import styles, { primaryColor } from "@/app/styles/style";
 import { Ionicons } from "@expo/vector-icons";
 
 type Props = {
@@ -40,10 +40,12 @@ const style = StyleSheet.create({
     },
     buttonWrapper: {
         padding:15,
-        backgroundColor:'#333', 
+        paddingLeft: 20,
+        paddingRight: 20,
+        backgroundColor: primaryColor, 
         alignItems:'center',
         width: '100%',
-        borderRadius: 5,
+        borderRadius: 35,
     },
     textItemQuantity: {
         fontSize: 13,
