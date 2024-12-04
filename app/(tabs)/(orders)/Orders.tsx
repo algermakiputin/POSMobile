@@ -49,7 +49,7 @@ const Orders = () => {
             </View>
             <View style={{paddingLeft: 20, backgroundColor: 'white'}}>
                 <View style={{}}>
-                    <ScrollView  horizontal={true} >
+                    <ScrollView  horizontal={true} showsHorizontalScrollIndicator={false}>
                         <Layout style={[style.categoriesWrapper]}>
                             <View style={style.category}> 
                                 <Ionicons name="grid-outline" style={style.categoryIcon} size={14} />

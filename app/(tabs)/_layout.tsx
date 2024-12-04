@@ -5,6 +5,7 @@ import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Text } from 'react-native';
+import { primaryColor } from '../styles/style';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -12,7 +13,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: primaryColor,
         headerShown: false,
       }}>
       <Tabs.Screen
