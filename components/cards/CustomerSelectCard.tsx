@@ -1,29 +1,37 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { Text } from "@ui-kitten/components";
 import { Ionicons } from "@expo/vector-icons";
+import CustomerSelectModal from "../modals/CustomerSelectModal";
+import { Fragment, useState } from "react";
+
 const CustomerSelectCard = () => {
+    const [showSelectCustomerModal, setShowCustomerSelectModal] = useState(false);
     const editButtonHandler = () => {
-        alert('editing');
+        setShowCustomerSelectModal(!showSelectCustomerModal);
     }
     return (
-        <View style={{height:60}}>
-            <View style={style.customerWrapper}>
-                <View style={{flex:1, flexDirection:'row', alignItems: 'center'}}>
-                    <View style={style.avatar}>
-                        <Ionicons name="person-circle-outline" size={26} />
+        <Fragment>
+            <CustomerSelectModal show={showSelectCustomerModal} showHandler={editButtonHandler} />
+            <View style={{height:60}}>
+                
+                <View style={style.customerWrapper}>
+                    <View style={{flex:1, flexDirection:'row', alignItems: 'center'}}>
+                        <View style={style.avatar}>
+                            <Ionicons name="person-circle-outline" size={26} />
+                        </View>
+                        <View style={style.customerDetails}>
+                            <Text>Customer</Text>
+                            <Text>Alger</Text>
+                        </View>
                     </View>
-                    <View style={style.customerDetails}>
-                        <Text>Customer</Text>
-                        <Text>Alger</Text>
-                    </View>
+                    <TouchableOpacity onPress={editButtonHandler}>
+                        <View style={{flex:1, alignItems: 'flex-end', justifyContent:'center'}}>
+                            <Text>Edit <Ionicons name="create-outline" /></Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity onPress={editButtonHandler}>
-                    <View style={{flex:1, alignItems: 'flex-end', justifyContent:'center'}}>
-                        <Text>Edit <Ionicons name="create-outline" /></Text>
-                    </View>
-                </TouchableOpacity>
             </View>
-        </View>
+        </Fragment>
     );
 }
 

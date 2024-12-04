@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, View, Dimensions } from "react-native";
 import styles from "@/app/styles/style";
-import { Button, IconElement, List, ListItem, Layout, Text, Divider, SelectItem, Select } from '@ui-kitten/components';
+import { Button, IconElement, List, ListItem, Layout, Text, Divider } from '@ui-kitten/components';
 import { Fragment } from "react";
 import Dropdown from "@/components/dropdown/Dropdown";
 

@@ -3,7 +3,9 @@ import { StyleSheet, View } from 'react-native';
 import { Text } from '@ui-kitten/components';
 
 type Props = {
-    data: Data[]
+    data: Data[],
+    width?: number,
+    placeholder?: string
 }
 
 type Data = {
@@ -16,9 +18,10 @@ const Dropdown = (props: Props) => {
             onSelect={(selectedItem, index) => {
             console.log(selectedItem, index);
             }}
+            searchPlaceHolder={props.placeholder}
             renderButton={(selectedItem, isOpened) => {
             return (
-                <View style={styles.dropdownButtonStyle}>
+                <View style={[styles.dropdownButtonStyle, {width: props?.width ? props.width : 140}]}>
                 {/* {selectedItem && (
                     <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
                 )} */}
@@ -47,7 +50,7 @@ export default Dropdown;
 
 const styles = StyleSheet.create({
 dropdownButtonStyle: {
-    width: 120,
+    width: 140,
     height: 40,
     backgroundColor: '#E9ECEF',
     borderRadius: 12,

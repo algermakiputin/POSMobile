@@ -5,6 +5,12 @@ export const accentColor = "#72aca9";
 export const bodyColor = '#f4f4f5';
 
 const styles = StyleSheet.create({
+    mb10: {
+        marginBottom: 10
+    },
+    mb5: {
+        marginBottom: 5
+    }, 
     container: {
         flex: 1,
         padding: 20,
