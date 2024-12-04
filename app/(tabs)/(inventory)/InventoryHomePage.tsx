@@ -1,10 +1,11 @@
 import { useRouter } from "expo-router";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import styles from "@/app/styles/style";
-import { Input, List} from "@ui-kitten/components";
+import { Input, List, Text} from "@ui-kitten/components";
 import { Ionicons } from "@expo/vector-icons";
 import { Menu, MenuOptions, MenuOption, MenuTrigger, renderers } from 'react-native-popup-menu';
 import { routes } from "@/app/types/routes";
+import { blackLightShade } from "@/app/styles/style";
 
 const data = new Array(8).fill({
     title: 'Title for Item',
@@ -25,6 +26,7 @@ const InventoryHomePage = () => {
     const renderItem = () => {
         return (
             <View style={styles.card}>
+                <Text style={{color: '#777'}}>0019201092</Text>
                 <Text style={style.itemTitle}>Surf Powder Bar With Fabcon</Text>
                 <View style={styles.row}>
                     <View style={styles.col1}>
@@ -34,7 +36,7 @@ const InventoryHomePage = () => {
                         <Text>Stocks: 24</Text>
                         <Text>Supplier: J&B</Text>
                         <Text>Category: Sabon</Text>
-                        <Text>Location: 1</Text>
+                        <Text style={style.price}>95.00</Text>
                     </View> 
                 </View> 
                 <Menu renderer={ContextMenu} style={{width:20, position:'absolute', right: 10, bottom:20}}>
@@ -126,6 +128,9 @@ const style = StyleSheet.create({
         width:40, 
         justifyContent: 'center', 
         alignItems: 'center',
+    },
+    price: {
+        fontWeight: 'bold'
     }
 });
 

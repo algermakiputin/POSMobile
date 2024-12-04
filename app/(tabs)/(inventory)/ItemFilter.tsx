@@ -5,15 +5,23 @@ import { primaryColor } from "@/app/styles/style";
 const ItemFilter = () => {
     const categories = ['Drinks', 'Detergents', 'Fish', 'Frozen Meat', 'Candy', 'Beverage', 'Alcohol', 'Medicine', 'Load'];
     const suppliers = ['J&T', 'ABS-FISH', 'MAGNOLIA', 'Jupiter', 'Mars', 'Venus', 'Sun & Moon'];
-    const [selectedCategory, setSelectedCategory] = useState('');
-    const [selectedSupplier, setSelectedSupplier] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
+    const [selectedSupplier, setSelectedSupplier] = useState<string[]>([]);
 
     const categoryFilterSelectHandler = (category: string) => {
-        setSelectedCategory(category);
+        setSelectedCategory((prevState) => ([...prevState as string[], category]));
     }
 
     const supplierSelectHandler = (supplier: string) => {
-        setSelectedSupplier(supplier);
+        setSelectedSupplier((prevState) => ([...prevState as string[], supplier]));
+    }
+
+    const isCategorySelected = (category: string) => {
+        return selectedCategory?.some((value) => value == category);
+    }
+
+    const isSupplierSelected = (supplier: string) => {
+        return selectedSupplier?.some((value) => value == supplier);
     }
     
     return ( 
@@ -26,8 +34,8 @@ const ItemFilter = () => {
                         {
                             categories.map((category: string, index: number) => (
                                 <TouchableOpacity onPress={() => categoryFilterSelectHandler(category)} key={`category-${index}`}>
-                                    <View style={[localStyle.labelContainer, selectedCategory == category ? {backgroundColor: primaryColor} : {}]}>
-                                        <Text style={selectedCategory == category ? {color: '#fff'} : {}}>{category}</Text>
+                                    <View style={[localStyle.labelContainer,  isCategorySelected(category) ? {backgroundColor: primaryColor} : {}]}>
+                                        <Text style={isCategorySelected(category) ? {color: '#fff'} : {}}>{category}</Text>
                                     </View>
                                 </TouchableOpacity>
                             ))
@@ -42,8 +50,8 @@ const ItemFilter = () => {
                         {
                             suppliers.map((supplier: string, index: number) => (
                                 <TouchableOpacity onPress={() => supplierSelectHandler(supplier)} key={`supplier-${index}`}>
-                                    <View style={[localStyle.labelContainer, selectedSupplier == supplier ? localStyle.selectedFilter : {}]}>
-                                        <Text style={selectedSupplier == supplier ? localStyle.selectedFilterText : {}}>{supplier}</Text>
+                                    <View style={[localStyle.labelContainer, isSupplierSelected(supplier) ? localStyle.selectedFilter : {}]}>
+                                        <Text style={isSupplierSelected(supplier) ? localStyle.selectedFilterText : {}}>{supplier}</Text>
                                     </View>
                                 </TouchableOpacity>
                             ))

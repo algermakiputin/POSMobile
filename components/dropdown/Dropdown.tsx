@@ -16,7 +16,7 @@ const Dropdown = (props: Props) => {
         <SelectDropdown
             data={props.data}
             onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index);
+                console.log(selectedItem, index);
             }}
             searchPlaceHolder={props.placeholder}
             renderButton={(selectedItem, isOpened) => {

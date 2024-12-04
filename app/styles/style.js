@@ -3,6 +3,7 @@ export const primaryColor = "#004AA9";
 export const secondaryColor = "#31ABFF";
 export const accentColor = "#72aca9";
 export const bodyColor = '#f4f4f5';
+export const blackLightShade = "#777";
 
 const styles = StyleSheet.create({
     mb10: {
