@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import styles from "@/app/styles/style";
+import styles, { bodyColor } from "@/app/styles/style";
 import { Input, List, Text} from "@ui-kitten/components";
 import { Ionicons } from "@expo/vector-icons";
 import { Menu, MenuOptions, MenuOption, MenuTrigger, renderers } from 'react-native-popup-menu';
@@ -57,10 +57,13 @@ const InventoryHomePage = () => {
     return ( 
         <View style={styles.container}>
             <View style={style.filterWrapper}>
-                <Input accessoryLeft={renderSearchIcon} style={style.filterLeft}/>
+                <Input accessoryLeft={renderSearchIcon} style={style.filterLeft} />
                 <View style={style.filterRight}>
                     <TouchableOpacity onPress={filterButtonHandler}>
-                        <Ionicons name="filter-outline" size={24} />
+                        <View style={{display:'flex',flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', gap: 10}}>
+                            <Ionicons name="filter-outline" size={18} /> 
+                            <Text>Filter</Text>
+                        </View>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -118,16 +121,22 @@ const style = StyleSheet.create({
     filterWrapper: {
         marginBottom:15, 
         flexDirection: 'row',
-        display: 'flex'
+        display: 'flex',
+        gap: 10
     },
     filterLeft: {
         width:'auto', 
         flex:1
     },
     filterRight: {
-        width:40, 
         justifyContent: 'center', 
         alignItems: 'center',
+        backgroundColor: '#fff',
+        paddingLeft: 15,
+        paddingRight: 15,
+        borderWidth: 1,
+        borderColor: '#eee',
+        borderRadius: 5
     },
     price: {
         fontWeight: 'bold'
