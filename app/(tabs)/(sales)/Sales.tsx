@@ -20,11 +20,11 @@ const Sales = () => {
             description={`${item.description}`}
             accessoryLeft={renderItemIcon(index + 1)}
             accessoryRight={renderItemAccessory}
-            style={{marginBottom:10}}
+            style={{}}
         />
     );
 
-    const data = new Array(10).fill({
+    const data = new Array(25).fill({
         title: "1x Dandelion Juice",
         description: 'PHP 18'
     });
@@ -63,7 +63,7 @@ const Sales = () => {
                     </ScrollView>
                 </View> 
             </View>
-            <View style={[styles.container, {borderRadius: 10}]}>
+            <View style={[{borderRadius: 10, paddingLeft: 20, paddingRight: 20}]}>
                 <Layout>
                     <Text style={[styles.sectionHeader, {paddingLeft: 15,paddingTop:15}]}>Recent Transaction</Text>
                     <Divider/>
@@ -71,6 +71,7 @@ const Sales = () => {
                         style={{}}
                         data={data}
                         renderItem={renderItem}
+                        ItemSeparatorComponent={Divider}
                     />
                 </Layout>
             </View>

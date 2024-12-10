@@ -7,6 +7,8 @@ import { Ionicons } from "@expo/vector-icons";
 type Props = {
     onPressHandler?: () => void;
     title?: string;
+    itemCount?: number,
+    total?: number
 }
 
 const Button = (Props: Props) => {
@@ -23,8 +25,8 @@ const Button = (Props: Props) => {
                 </View>
                 <View>
                     <View style={styles.flexColumns}>
-                        <Text style={style.textItemQuantity}>3 items</Text>
-                        <Text style={style.textAmount}>$100</Text>
+                        <Text style={style.textItemQuantity}>{Props?.itemCount || 3} items</Text>
+                        <Text style={style.textAmount}>{Props?.total}</Text>
                         <Ionicons name="arrow-forward-outline"  size={18} color={'#fff'}/>
                     </View>
                 </View>
