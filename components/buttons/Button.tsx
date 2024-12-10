@@ -3,6 +3,7 @@ import { View, StyleSheet } from "react-native";
 import { Text } from "@ui-kitten/components";
 import styles, { primaryColor } from "@/app/styles/style";
 import { Ionicons } from "@expo/vector-icons";
+import { formatAmount } from "@/app/utils/utils";
 
 type Props = {
     onPressHandler?: () => void;
@@ -25,8 +26,8 @@ const Button = (Props: Props) => {
                 </View>
                 <View>
                     <View style={styles.flexColumns}>
-                        <Text style={style.textItemQuantity}>{Props?.itemCount || 3} items</Text>
-                        <Text style={style.textAmount}>{Props?.total}</Text>
+                        <Text style={style.textItemQuantity}>{Props?.itemCount || 0} items</Text>
+                        <Text style={style.textAmount}>{formatAmount(Number(Props?.total))}</Text>
                         <Ionicons name="arrow-forward-outline"  size={18} color={'#fff'}/>
                     </View>
                 </View>

@@ -1,7 +1,7 @@
 import { Input, Layout, Text, List, Divider } from "@ui-kitten/components";
 import { ScrollView, View, StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
-import styles, { primaryColor, bodyColor } from "@/app/styles/style";
+import styles, { primaryColor, bodyColor, primarySpotColor } from "@/app/styles/style";
 import Button from "@/components/buttons/Button";
 import { Ionicons } from "@expo/vector-icons";
 import { useContext, useEffect, useMemo, useState } from "react";
@@ -13,7 +13,7 @@ const Orders = () => {
     const route = useRouter();
     const { order, quantityHandler, orderTotal} = useContext(OrderContext);
     const [selectedIndex, setSelectedIndex] = useState<number>();
-    
+    const [selectedCategory, setSelectedCategory] = useState<string>('');
     const processOrderHandler = () => {
         route.navigate('/(orders)/summary');
     }
@@ -92,7 +92,6 @@ const Orders = () => {
                     }
                 </Layout>
             </TouchableOpacity>
-            
         )
     }
 
@@ -101,49 +100,49 @@ const Orders = () => {
     }
 
     return (
-        <View style={{position: 'relative', flex:1, backgroundColor: '#fff'}}>
-            <View style={{padding: 20, backgroundColor: bodyColor}}>
+        <View style={style.container}>
+            <View style={style.searchContainer}>
                 <Input placeholder="Search Item" accessoryLeft={searchIcon} />
             </View>
-            <View style={{paddingLeft: 20, backgroundColor: 'white'}}>
-                <View style={{}}>
-                    <ScrollView  horizontal={true} showsHorizontalScrollIndicator={false}>
-                        <Layout style={[style.categoriesWrapper]}>
-                            <View style={style.category}> 
+            <View style={style.categoryContainer}> 
+                <ScrollView  horizontal={true} showsHorizontalScrollIndicator={false}>
+                    <Layout style={[style.categoriesWrapper]}>
+                        <TouchableOpacity onPress={() => alert(0)}>
+                            <View style={[style.category, style.categorySelected]}> 
                                 <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14} />
-                                <Text>Foods</Text>
+                                <Text style={style.selectedCategoryColor}>All</Text>
                             </View>
-                            <View style={style.category}> 
-                                <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14}/>
-                                <Text>Liquor</Text>
-                            </View>
-                            <View style={style.category}> 
-                                <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14}/>
-                                <Text>Drinks</Text>
-                            </View>
-                            <View style={style.category}> 
-                                <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14}/>
-                                <Text>Frozen</Text>
-                            </View>
-                            <View style={style.category}> 
-                                <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14}/>
-                                <Text>Fish</Text>
-                            </View>
-                            <View style={style.category}> 
-                                <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14}/>
-                                <Text>Soft Drinks</Text>
-                            </View>
-                            <View style={style.category}> 
-                                <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14}/>
-                                <Text>Detergents</Text>
-                            </View>
-                        </Layout>
-                    </ScrollView>
-                </View>
+                        </TouchableOpacity>
+                        <View style={style.category}> 
+                            <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14}/>
+                            <Text>Liquor</Text>
+                        </View>
+                        <View style={style.category}> 
+                            <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14}/>
+                            <Text>Drinks</Text>
+                        </View>
+                        <View style={style.category}> 
+                            <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14}/>
+                            <Text>Frozen</Text>
+                        </View>
+                        <View style={style.category}> 
+                            <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14}/>
+                            <Text>Fish</Text>
+                        </View>
+                        <View style={style.category}> 
+                            <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14}/>
+                            <Text>Soft Drinks</Text>
+                        </View>
+                        <View style={style.category}> 
+                            <Ionicons name="grid-outline" color={primaryColor} style={style.categoryIcon} size={14}/>
+                            <Text>Detergents</Text>
+                        </View>
+                    </Layout>
+                </ScrollView>
             </View>
             <View style={[styles.container, {paddingTop: 10}]}>
                 <List
-                    style={{backgroundColor: '#fff', paddingTop:0, marginBottom: 60}}
+                    style={style.listStyle}
                     data={data}
                     renderItem={renderItem}
                 />
@@ -160,6 +159,31 @@ const Orders = () => {
 }
 
 const style = StyleSheet.create({
+    selectedCategoryColor: {
+        color: primaryColor
+    },
+    categorySelected: {
+        borderColor: primaryColor, 
+        backgroundColor: primarySpotColor
+    },
+    listStyle: {
+        backgroundColor: '#fff', 
+        paddingTop:0, 
+        marginBottom: 60
+    },
+    container: {
+        position: 'relative', 
+        flex:1, 
+        backgroundColor: '#fff'
+    },
+    searchContainer: {
+        padding: 20, 
+        backgroundColor: bodyColor
+    },
+    categoryContainer: {
+        paddingLeft: 20, 
+        backgroundColor: 'white'
+    },
     price: {
         fontWeight: 700
     },
