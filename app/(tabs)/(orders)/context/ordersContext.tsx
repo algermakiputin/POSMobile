@@ -15,12 +15,14 @@ const defaultValue = {
         customerName: '',
         customerId: ''
     },
-    quantityHandler: (action: string, item: any) => 0
+    quantityHandler: (action: string, item: any) => 0,
+    orderTotal: 0
 }
 
 type Context = {
     order: Order,
-    quantityHandler: (action: string, item: any) => void
+    quantityHandler: (action: string, item: any) => void,
+    orderTotal: number
 }
 
 const OrderContext = createContext<Context>(defaultValue);

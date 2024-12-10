@@ -11,7 +11,9 @@ import OrderContext from "./context/ordersContext";
 
 const Orders = () => {
     const route = useRouter();
-    const { order, quantityHandler} = useContext(OrderContext);
+    const { order, quantityHandler, orderTotal} = useContext(OrderContext);
+    const [selectedIndex, setSelectedIndex] = useState<number>();
+    
     const processOrderHandler = () => {
         route.navigate('/(orders)/summary');
     }
@@ -57,38 +59,42 @@ const Orders = () => {
         },
     ];
 
-    const renderItem = ({ item }: { item: Item }) => {
+    const renderItem = ({ item, index }: { item: Item, index: number }) => {
+        const isSelected = (selectedIndex == index || renderQuantity(item.id));
         return (
-            <Layout style={[style.item, renderQuantity(item.id) ? {borderWidth: 1, borderColor: primaryColor} : {}]}>
-                <Layout  style={[style.layout, style.avatar]}>
-                    <Ionicons name="image-outline" size={30} style={{color: '#ccc'}}/>
+            <TouchableOpacity onPress={() => setSelectedIndex(index)}>
+                <Layout style={[style.item, isSelected ? {borderWidth: 1, borderColor: primaryColor} : {}]}>
+                    <Layout  style={[style.layout, style.avatar]}>
+                        <Ionicons name="image-outline" size={30} style={{color: '#ccc'}}/>
+                    </Layout>
+                    <Layout  style={[style.layout, {alignItems:'flex-start', maxWidth:165}]}>
+                        <Text>{item.name}</Text>
+                        {
+                            isSelected ? <Text style={style.price}>{item.price}</Text> : null
+                        }
+                    </Layout>
+                    {
+                        isSelected ? (
+                            <Layout  style={style.quantity}>
+                                <View style={style.actionIconContainer}>
+                                    <TouchableOpacity onPress={() => quantityHandler('minus', item)}>
+                                        <Ionicons name="remove-outline" size={14} color={'#000'}/>
+                                    </TouchableOpacity>
+                                </View>
+                                <Text>{renderQuantity(item.id)}</Text>
+                                <View style={style.actionIconContainer}>
+                                    <TouchableOpacity onPress={() => quantityHandler('add', item)}>
+                                        <Ionicons name="add-outline" size={14} color={'#000'}/>
+                                    </TouchableOpacity>
+                                </View>
+                            </Layout>
+                        ) : <Layout style={style.quantity}><Text style={style.price}>{item.price}</Text></Layout>
+                    }
                 </Layout>
-                <Layout  style={[style.layout, {alignItems:'flex-start', maxWidth:165}]}>
-                    <Text>{item.name}</Text>
-                    <Text style={style.price}>{item.price}</Text>
-                </Layout>
-                <Layout  style={style.quantity}>
-                    <View style={style.actionIconContainer}>
-                        <TouchableOpacity onPress={() => quantityHandler('add', item)}>
-                            <Ionicons name="add-outline" size={14} color={'#000'}/>
-                        </TouchableOpacity>
-                    </View>
-                    <Text>{renderQuantity(item.id)}</Text>
-                    <View style={style.actionIconContainer}>
-                        <TouchableOpacity onPress={() => quantityHandler('minus', item)}>
-                            <Ionicons name="remove-outline" size={14} color={'#000'}/>
-                        </TouchableOpacity>
-                    </View>
-                </Layout>
-            </Layout>
+            </TouchableOpacity>
+            
         )
     }
-
-    const orderTotal = useMemo(() => {
-        return order?.cart?.lineItems?.reduce((previous:number, item:any) => {
-            return (item?.price * item?.quantity) + previous;
-        }, 0);
-    }, [order]);
 
     const searchIcon = () => {
         return <Ionicons name="search-outline" />
@@ -158,7 +164,7 @@ const style = StyleSheet.create({
         fontWeight: 700
     },
     actionIconContainer: {
-        padding: 6, 
+        padding: 7, 
         backgroundColor: '#fff', 
         borderRadius: 50,
         borderWidth: 1,
@@ -195,15 +201,15 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         marginBottom: 10,
         backgroundColor: '#fff',
-        padding: 10,
+        padding: 6.5,
         borderColor: bodyColor,
         borderWidth: 1,
         gap: 10
     },
     avatar: {
-        width: 60,
+        width: 50,
         backgroundColor: '#ddd',
-        height: 60,
+        height: 50,
         borderRadius: 10
     },
     layout: {

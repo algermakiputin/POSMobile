@@ -5,7 +5,7 @@ import 'react-native-reanimated';
 import OrderContext from './context/ordersContext';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Order, CartLineItem } from '@/app/types/order';
 import { Item } from '@/app/types/item';
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -18,20 +18,22 @@ export default function OrdersLayout() {
     const lineItems = order?.cart?.lineItems; 
     const existingItem = lineItems?.find(row => row.itemId  == item.id);
     const isAdd = action == "add";
-    if (existingItem) { 
+    if (existingItem) {
+        const lineItems = order?.cart.lineItems?.map((lineItem: CartLineItem) => {
+          const quantity = isAdd ? lineItem.quantity + 1 : lineItem?.quantity ? lineItem.quantity - 1 : 0;
+          if (lineItem.itemId == item.id) {
+              return {
+                  ...lineItem,
+                  quantity: quantity
+              }
+          } else {
+              return lineItem;
+          }
+        });
         setOrder((prevState: any) => ({
             ...prevState,
             cart: {
-                lineItems: order?.cart.lineItems?.map((lineItem: CartLineItem) => {
-                    if (lineItem.itemId == item.id) {
-                        return {
-                            ...lineItem,
-                            quantity: isAdd ? lineItem.quantity + 1 : lineItem?.quantity ? lineItem.quantity - 1 : 0
-                        }
-                    } else {
-                        return lineItem
-                    }
-                })
+                lineItems: lineItems.filter(item => item.quantity)
             }
         }));
     } else { 
@@ -54,8 +56,14 @@ export default function OrdersLayout() {
     }
   }
 
+  const orderTotal = useMemo(() => {
+    return order?.cart?.lineItems?.reduce((previous:number, item:any) => {
+        return (item?.price * item?.quantity) + previous;
+    }, 0);
+}, [order]);
+
   return (
-    <OrderContext.Provider value={{order, quantityHandler}}>
+    <OrderContext.Provider value={{order, quantityHandler, orderTotal}}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack screenOptions={{headerShown: true}}>
           <Stack.Screen 
