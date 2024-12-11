@@ -1,10 +1,11 @@
+import { primaryColor } from "@/app/styles/style";
 import { Layout, Text } from "@ui-kitten/components";
 import { View, StyleSheet } from "react-native";
 
 const InventorySummary = () => {
     return (
         <Layout style={localStyles.cardContainer}>
-            <Text style={localStyles.cardHeaderText}>Inventory Summary</Text>
+            <Text style={localStyles.cardHeaderText} category="s1">Inventory Summary</Text>
             <Layout style={{flexDirection: 'row', display: 'flex', flexWrap: 'wrap'}}> 
                 <Layout style={localStyles.layout}>
                     <Text style={localStyles.textDescription}>Total Items</Text>
@@ -34,12 +35,13 @@ const InventorySummary = () => {
 
 const localStyles = StyleSheet.create({
     cardHeaderText: {
-        marginBottom: 10
+        marginBottom: 10,
+        fontWeight: 700
     },
     cardContainer: {
         borderRadius: 10,
         padding: 20,
-        borderLeftColor: 'black',
+        borderLeftColor: primaryColor,
         borderLeftWidth: 5
     },
     layout: {
