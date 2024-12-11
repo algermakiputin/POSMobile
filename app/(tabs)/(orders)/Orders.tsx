@@ -15,7 +15,7 @@ const Orders = () => {
     const [selectedIndex, setSelectedIndex] = useState<number>();
     const [selectedCategory, setSelectedCategory] = useState<string>('');
     const processOrderHandler = () => {
-        route.navigate('/(orders)/summary');
+        if (order?.cart?.lineItems?.length) route.navigate('/(orders)/summary');
     }
 
     const renderQuantity = (itemId: string) => {

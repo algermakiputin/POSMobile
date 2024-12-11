@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { Order } from "@/app/types/order";
 
-const defaultValue = {
+export const defaultValue = {
     order: {
         cart: {
             lineItems: [{
@@ -16,13 +16,16 @@ const defaultValue = {
         customerId: ''
     },
     quantityHandler: (action: string, item: any) => 0,
-    orderTotal: 0
+    setCustomer: (data: any) => null,
+    orderTotal: 0,
 }
 
 type Context = {
     order: Order,
     quantityHandler: (action: string, item: any) => void,
-    orderTotal: number
+    orderTotal: number,
+    setCustomer: (data: any) => void,
+    resetState?: () => void
 }
 
 const OrderContext = createContext<Context>(defaultValue);

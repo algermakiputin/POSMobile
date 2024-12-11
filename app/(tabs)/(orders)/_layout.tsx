@@ -2,7 +2,7 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen'; 
 import 'react-native-reanimated';
-import OrderContext from './context/ordersContext';
+import OrderContext, { defaultValue } from './context/ordersContext';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useMemo, useState } from 'react';
@@ -60,10 +60,22 @@ export default function OrdersLayout() {
     return order?.cart?.lineItems?.reduce((previous:number, item:any) => {
         return (item?.price * item?.quantity) + previous;
     }, 0);
-}, [order]);
+  }, [order]);
+
+  const setCustomer = (data: any) => {
+    setOrder(prevState => ({
+      ...prevState,
+      customerId: data?.id,
+      customerName: data?.title
+    }));
+  }
+
+  const resetState = () => {
+    setOrder(defaultValue.order);
+  }
 
   return (
-    <OrderContext.Provider value={{order, quantityHandler, orderTotal}}>
+    <OrderContext.Provider value={{order, quantityHandler, orderTotal, setCustomer, resetState}}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack screenOptions={{headerShown: true}}>
           <Stack.Screen 

@@ -5,7 +5,8 @@ import { Text } from '@ui-kitten/components';
 type Props = {
     data: Data[],
     width?: number,
-    placeholder?: string
+    placeholder?: string,
+    onSelect?: (item: any) => void
 }
 
 type Data = {
@@ -16,7 +17,7 @@ const Dropdown = (props: Props) => {
         <SelectDropdown
             data={props.data}
             onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index);
+                if (props?.onSelect) props?.onSelect(selectedItem);
             }}
             searchPlaceHolder={props.placeholder}
             renderButton={(selectedItem, isOpened) => {
@@ -26,7 +27,7 @@ const Dropdown = (props: Props) => {
                     <Icon name={selectedItem.icon} style={styles.dropdownButtonIconStyle} />
                 )} */}
                 <Text style={styles.dropdownButtonTxtStyle}>
-                    {(selectedItem && selectedItem.title) || 'Today'}
+                    {(selectedItem && selectedItem.title) || props.placeholder}
                 </Text>
                 {/* <Icon name={isOpened ? 'chevron-up' : 'chevron-down'} style={styles.dropdownButtonArrowStyle} /> */}
                 </View>

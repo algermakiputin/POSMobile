@@ -1,10 +1,14 @@
 import { List, ListItem, Divider, Layout, Text } from "@ui-kitten/components";
-import { View, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import CustomerSelectCard from "@/components/cards/CustomerSelectCard";
 import styles from "@/app/styles/style";
 import Button from "@/components/buttons/Button";
 import { useRouter } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import OrderContext from "./context/ordersContext";
+import { useContext } from "react";
+import { CartLineItem } from "@/app/types/order";
+import { formatAmount } from "@/app/utils/utils";
+import { defaultValue } from "./context/ordersContext";
 interface IListItem {
   title: string;
   description: string;
@@ -17,27 +21,29 @@ const data = new Array(3).fill({
 
 const Summary = () => {
   const route = useRouter();
+  const {order, orderTotal, resetState} = useContext(OrderContext);
   const renderItemIcon = (props: any) => (
     <View style={{height:55,width:55,backgroundColor:'#777', borderRadius:5}}>
     </View>
   );
 
-  const renderItemAccessory = (): React.ReactElement => (
+  const renderItemAccessory = (total: number): React.ReactElement => (
       <Layout style={style.quantity}>
-          <Text>120.00</Text>
+          <Text>{formatAmount(total)}</Text>
       </Layout>
     );
     
   const submitHandler = () => {
+    if (resetState) resetState();
     route.navigate('/(orders)/receipt');
   }
 
-  const renderItem = ({ item, index }: { item: IListItem; index: number }): React.ReactElement => (
+  const renderItem = ({ item, index }: { item: CartLineItem; index: number }): React.ReactElement => (
       <ListItem
-        title={`${item.title} ${index + 1}`}
-        description={`1x 120`}
+        title={`${item.name} ${index + 1}`}
+        description={`${item.quantity}x ${item.price}`}
         accessoryLeft={renderItemIcon}
-        accessoryRight={renderItemAccessory}
+        accessoryRight={() => renderItemAccessory((Number(item?.price) * item.quantity))}
       />
     );
 
@@ -46,29 +52,31 @@ const Summary = () => {
       <CustomerSelectCard /> 
       <Divider style={styles.mb10}/>
       <View style={style.priceSummaryContainer}>
-        <Text style={style.priceSummaryHeader}>Price Summary</Text>
+        <Text style={style.priceSummaryHeader} category="s1">Price Summary</Text>
         <Divider style={style.dividerMTB5}/>
         <View style={[styles.flexColumns, styles.mb5]}>
           <Text>SubTotal</Text>
-          <Text><Text style={style.textAmount}>360.00</Text></Text>
+          <Text><Text style={style.textAmount}>{formatAmount(orderTotal)}</Text></Text>
         </View>
         <View style={[styles.flexColumns]}>
           <Text>Total</Text>
-          <Text><Text style={style.textAmount}>360.00</Text></Text>
+          <Text><Text style={style.textAmount}>{formatAmount(orderTotal)}</Text></Text>
         </View>
       </View> 
       <Divider style={style.divider}/>
-      <Text>Order List</Text>
+      
       <Divider style={styles.mb5}/>
       <Layout>
+        <Text category="s1" style={{padding: 10}}>Order Details</Text>
+        <Divider />
         <List
-          data={data}
+          data={order.cart.lineItems}
           renderItem={renderItem}
           ItemSeparatorComponent={Divider}
         />
       </Layout>
       <View style={styles.floatBottom}>
-        <Button onPressHandler={submitHandler} title="Complete Order"/>
+        <Button itemCount={order?.cart?.lineItems?.length} total={orderTotal} onPressHandler={submitHandler} title="Complete Order"/>
       </View>
     </View>
   );
