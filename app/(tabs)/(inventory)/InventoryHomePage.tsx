@@ -5,7 +5,9 @@ import { Input, List, Text} from "@ui-kitten/components";
 import { Ionicons } from "@expo/vector-icons";
 import { Menu, MenuOptions, MenuOption, MenuTrigger, renderers } from 'react-native-popup-menu';
 import { routes } from "@/app/types/routes";
-import { blackLightShade } from "@/app/styles/style";
+import { GET_ITEMS } from "@/app/src/queries";
+import { useQuery } from "@apollo/client";
+import { Item } from "@/app/types/item";
 
 const data = new Array(8).fill({
     title: 'Title for Item',
@@ -15,6 +17,7 @@ const data = new Array(8).fill({
 const InventoryHomePage = () => {
     const router = useRouter(); 
     const { ContextMenu } = renderers;
+    const { loading, error, data } = useQuery(GET_ITEMS); 
     const renderSearchIcon = () => {
         return <Ionicons name="search-outline" />
     } 
@@ -23,11 +26,11 @@ const InventoryHomePage = () => {
         router.navigate({pathname: routes.itemFilter as any});
     }
 
-    const renderItem = () => {
+    const renderItem = ({item} : { item: Item}) => {
         return (
             <View style={styles.card}>
                 <Text style={{color: '#777'}}>0019201092</Text>
-                <Text style={style.itemTitle}>Surf Powder Bar With Fabcon</Text>
+                <Text style={style.itemTitle}>{ item.name }</Text>
                 <View style={styles.row}>
                     <View style={styles.col1}>
                         <View style={style.itemAvatar}></View> 
@@ -36,7 +39,7 @@ const InventoryHomePage = () => {
                         <Text>Stocks: 24</Text>
                         <Text>Supplier: J&B</Text>
                         <Text>Category: Sabon</Text>
-                        <Text style={style.price}>95.00</Text>
+                        <Text style={style.price}>{ item.price }</Text>
                     </View> 
                 </View> 
                 <Menu renderer={ContextMenu} style={{width:20, position:'absolute', right: 10, bottom:20}}>
@@ -54,6 +57,8 @@ const InventoryHomePage = () => {
             </View>
         )
     }
+    console.log(`error`, error);
+    if (loading) return <Text>Loading...</Text>
     return ( 
         <View style={styles.container}>
             <View style={style.filterWrapper}>
@@ -69,7 +74,7 @@ const InventoryHomePage = () => {
             </View>
             <List
                 style={{backgroundColor: 'transparent'}}
-                data={data}
+                data={data?.items}
                 renderItem={renderItem}
             />
         </View>

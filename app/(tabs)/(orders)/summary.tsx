@@ -1,5 +1,5 @@
 import { List, ListItem, Divider, Layout, Text } from "@ui-kitten/components";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import CustomerSelectCard from "@/components/cards/CustomerSelectCard";
 import styles from "@/app/styles/style";
 import Button from "@/components/buttons/Button";
@@ -34,7 +34,6 @@ const Summary = () => {
     );
     
   const submitHandler = () => {
-    if (resetState) resetState();
     route.navigate('/(orders)/receipt');
   }
 
@@ -48,7 +47,7 @@ const Summary = () => {
     );
 
   return (
-    <View style={{padding:20, flex:1, height:'100%', position:'relative'}}>
+    <View style={styles.container}>
       <CustomerSelectCard /> 
       <Divider style={styles.mb10}/>
       <View style={style.priceSummaryContainer}>
@@ -64,17 +63,16 @@ const Summary = () => {
         </View>
       </View> 
       <Divider style={style.divider}/>
-      
-      <Divider style={styles.mb5}/>
-      <Layout>
-        <Text category="s1" style={{padding: 10}}>Order Details</Text>
+      <View style={{backgroundColor: '#fff', borderRadius: 5}}>
+        <Text category="s1" style={{marginBottom: 10, paddingLeft: 10,paddingTop: 10}}>Order Details</Text>
         <Divider />
         <List
           data={order.cart.lineItems}
           renderItem={renderItem}
           ItemSeparatorComponent={Divider}
         />
-      </Layout>
+      </View>  
+      
       <View style={styles.floatBottom}>
         <Button itemCount={order?.cart?.lineItems?.length} total={orderTotal} onPressHandler={submitHandler} title="Complete Order"/>
       </View>

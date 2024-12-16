@@ -1,6 +1,7 @@
 export enum routes {
     categories = "Categories",
     newCategory = "NewCategory",
+    suppliers = "Suppliers",
     newSupplier = "NewSupplier",
     inventory = "InventoryHomePage",
     newItem = "NewItem",

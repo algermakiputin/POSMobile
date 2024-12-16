@@ -26,7 +26,7 @@ const QuickMenu = () => {
                         </TouchableOpacity>
                     </Layout>
                     <Layout style={[styles.flex]}>
-                        <TouchableOpacity onPress={() => menuPressHandler(routeTypes.newSupplier)}>
+                        <TouchableOpacity onPress={() => menuPressHandler(routeTypes.suppliers)}>
                             <View style={[styles.flexCenter, localStyles.menu]}>
                                 <View style={{padding: 10,marginBottom: 5, backgroundColor: '#eee', borderRadius:100}}>
                                     <Ionicons name="cube-outline" size={20} color={primaryColor}/>

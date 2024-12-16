@@ -8,7 +8,9 @@ const Sales = () => {
     const { width } = Dimensions.get('window');
 
     const renderItemAccessory = (): React.ReactElement => (
-        <Text>2022-10-10</Text>
+        <View>
+            <Text>180</Text>
+        </View>
       );
     const renderItemIcon = (index: number): IconElement => (
         <Text>{index}</Text>
@@ -20,13 +22,13 @@ const Sales = () => {
             description={`${item.description}`}
             accessoryLeft={renderItemIcon(index + 1)}
             accessoryRight={renderItemAccessory}
-            style={{}}
         />
     );
 
     const data = new Array(25).fill({
         title: "1x Dandelion Juice",
-        description: 'PHP 18'
+        description: '1x PHP18',
+        total: 180
     });
 
     const dropdownData = [{title: 'Today'}, {title: 'Yesterday'}, {title: 'This Month'}, {title: 'Last Month'}];
@@ -36,12 +38,14 @@ const Sales = () => {
             <View style={{padding: 20}}>
                 <View style={[style.statisticsContainer]}>
                     <View style={[style.statisticHeader, { width: width - 60 }]}>
-                        <Layout style={[style.flexContainer, {backgroundColor: 'red', marginBottom: 10}]}>
+                        <Layout style={[style.flexContainer, {marginBottom: 10}]}>
                             <Layout style={[styles.flex, {justifyContent: 'center'}]}>
                                 <Text style={{fontWeight: 'black'}}>Statistics</Text>
                             </Layout>
                             <Layout style={[styles.flex, {alignItems: 'flex-end', justifyContent: 'center'}]} level="1">
+                                <View>
                                 <Dropdown data={dropdownData} />
+                                </View>
                             </Layout>
                         </Layout>
                     </View>

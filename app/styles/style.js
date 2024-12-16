@@ -7,6 +7,9 @@ export const bodyColor = '#f4f4f5';
 export const blackLightShade = "#777";
 
 const styles = StyleSheet.create({
+    bold: {
+        fontWeight: 700
+    },  
     mb10: {
         marginBottom: 10
     },

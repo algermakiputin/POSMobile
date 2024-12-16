@@ -7,6 +7,8 @@ import 'react-native-reanimated';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider} from '@ui-kitten/components';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { ApolloProvider } from '@apollo/client';
+import client from './src/ApolloClient';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -28,7 +30,7 @@ export default function RootLayout() {
   }
 
   return (
-    <Fragment>
+    <ApolloProvider client={client}>
       <ApplicationProvider {...eva} theme={eva.light}>
         <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
           <Stack>
@@ -39,6 +41,6 @@ export default function RootLayout() {
           </Stack>
         </ThemeProvider>
       </ApplicationProvider>
-    </Fragment>
+    </ApolloProvider>
   );
 }

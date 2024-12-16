@@ -221,7 +221,7 @@ const style = StyleSheet.create({
     item: {
         minHeight: 40,
         flex: 1,
-        borderRadius: 10,
+        borderRadius: 15,
         flexDirection: 'row',
         marginBottom: 10,
         backgroundColor: '#fff',
@@ -234,7 +234,7 @@ const style = StyleSheet.create({
         width: 50,
         backgroundColor: '#ddd',
         height: 50,
-        borderRadius: 10
+        borderRadius: 15
     },
     layout: {
         justifyContent: 'center',
