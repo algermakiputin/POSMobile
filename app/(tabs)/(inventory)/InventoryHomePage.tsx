@@ -9,11 +9,6 @@ import { GET_ITEMS } from "@/app/src/queries";
 import { useQuery } from "@apollo/client";
 import { Item } from "@/app/types/item";
 
-const data = new Array(8).fill({
-    title: 'Title for Item',
-    description: 'Description for Item',
-});
-
 const InventoryHomePage = () => {
     const router = useRouter(); 
     const { ContextMenu } = renderers;
@@ -21,9 +16,12 @@ const InventoryHomePage = () => {
     const renderSearchIcon = () => {
         return <Ionicons name="search-outline" />
     } 
-
     const filterButtonHandler = () => {
         router.navigate({pathname: routes.itemFilter as any});
+    }
+
+    const newButtonHandler = () => {
+        router.navigate({pathname: routes.newItem} as any);
     }
 
     const renderItem = ({item} : { item: Item}) => {
@@ -62,12 +60,20 @@ const InventoryHomePage = () => {
     return ( 
         <View style={styles.container}>
             <View style={style.filterWrapper}>
-                <Input accessoryLeft={renderSearchIcon} style={style.filterLeft} />
+                <Input accessoryLeft={renderSearchIcon} style={style.filterLeft} placeholder="Search Item..."/>
                 <View style={style.filterRight}>
                     <TouchableOpacity onPress={filterButtonHandler}>
-                        <View style={{display:'flex',flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', gap: 10}}>
-                            <Ionicons name="filter-outline" size={18} /> 
-                            <Text>Filter</Text>
+                        <View style={{display:'flex',flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', gap: 5}}>
+                            <Ionicons name="filter-outline" size={16} />
+                            <Text category="s2">Filter</Text> 
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={style.filterRight}>
+                    <TouchableOpacity onPress={newButtonHandler}>
+                        <View style={{display:'flex',flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', gap: 5}}>
+                            <Ionicons name="add-outline" size={16} /> 
+                            <Text category="s2">New</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -127,7 +133,7 @@ const style = StyleSheet.create({
         marginBottom:15, 
         flexDirection: 'row',
         display: 'flex',
-        gap: 10
+        gap: 5
     },
     filterLeft: {
         width:'auto', 
@@ -137,8 +143,8 @@ const style = StyleSheet.create({
         justifyContent: 'center', 
         alignItems: 'center',
         backgroundColor: '#fff',
-        paddingLeft: 15,
-        paddingRight: 15,
+        paddingLeft: 10,
+        paddingRight: 10,
         borderWidth: 1,
         borderColor: '#eee',
         borderRadius: 5

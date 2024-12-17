@@ -6,7 +6,8 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import { routes } from '@/app/types/routes';
 import { MenuProvider } from 'react-native-popup-menu';
 import { TouchableOpacity, View } from 'react-native';
-import { Text } from '@ui-kitten/components';
+import { Text, Button } from '@ui-kitten/components';
+import { Ionicons } from '@expo/vector-icons';
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -35,7 +36,7 @@ export default function InventoryLayout() {
             options={{ 
               headerShown: true,
               headerTitle: 'Inventory',
-              headerTitleAlign:'center'
+              headerTitleAlign:'center',
             }} 
             />
           <Stack.Screen 
