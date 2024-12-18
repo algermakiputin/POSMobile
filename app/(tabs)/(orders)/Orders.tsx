@@ -102,7 +102,7 @@ const Orders = () => {
     return (
         <View style={style.container}>
             <View style={style.searchContainer}>
-                <Input placeholder="Search Item" accessoryLeft={searchIcon} />
+                <Input style={{backgroundColor:'#fff', borderRadius: 10}} placeholder="Search Item" accessoryLeft={searchIcon} />
             </View>
             <View style={style.categoryContainer}> 
                 <ScrollView  horizontal={true} showsHorizontalScrollIndicator={false}>

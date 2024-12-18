@@ -55,7 +55,7 @@ const InventoryHomePage = () => {
             </View>
         )
     }
-    console.log(`error`, error);
+    if (error) return <View><Text>Error</Text></View>
     if (loading) return <Text>Loading...</Text>
     return ( 
         <View style={styles.container}>
