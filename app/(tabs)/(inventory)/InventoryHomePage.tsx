@@ -5,7 +5,7 @@ import { Input, List, Text} from "@ui-kitten/components";
 import { Ionicons } from "@expo/vector-icons";
 import { Menu, MenuOptions, MenuOption, MenuTrigger, renderers } from 'react-native-popup-menu';
 import { routes } from "@/app/types/routes";
-import { GET_ITEMS } from "@/app/src/queries";
+import { GET_ITEMS } from "@/app/src/item-queries";
 import { useQuery } from "@apollo/client";
 import { Item } from "@/app/types/item";
 
@@ -16,6 +16,7 @@ const InventoryHomePage = () => {
     const renderSearchIcon = () => {
         return <Ionicons name="search-outline" />
     } 
+    console.log(`error`, error);
     const filterButtonHandler = () => {
         router.navigate({pathname: routes.itemFilter as any});
     }

@@ -4,12 +4,32 @@ import { useForm, Controller } from "react-hook-form";
 import { SelectList } from "react-native-dropdown-select-list";
 import { Layout, } from "@ui-kitten/components";
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import * as ImagePicker from 'expo-image-picker';
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_CATEGORIES } from "@/app/src/categories-queries";
+import { GET_SUPPLIER } from "@/app/src/supplier-queries";
+import { STORE_ITEM } from "@/app/src/item-queries";
 
 const NewItem = () => {
     const { control, handleSubmit, formState: {errors} } = useForm();
     const [image, setImage] = useState('');
+    const { loading: categoryLoading, error: categoryError, data: categoriesData } = useQuery(GET_CATEGORIES);
+    const { loading: supplierLoading, error: supplierError, data: supplierData } = useQuery(GET_SUPPLIER);
+    const [formValues, setFormValues] = useState();
+    const supplierSelectData = useMemo(() => {
+        return supplierData?.suppliers?.map((supplier: any) => ({
+            key: supplier.id,
+            value: supplier.name
+        }))
+    }, [supplierData]);
+
+    const categoriesSelectData = useMemo(() => {
+        return categoriesData?.categories?.map((category: any) => ({
+            key: category.id,
+            value: category.name
+        }))
+    }, [supplierData]);
 
     const handleChoosePhoto = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -18,43 +38,32 @@ const NewItem = () => {
             quality: 1,
             mediaTypes: ImagePicker.MediaTypeOptions.Images
         });
-      
         if (!result.canceled) {
             setImage(result?.assets?.[0]?.uri);
         }
         if (result?.assets?.[0]?.uri) setImage(result?.assets?.[0]?.uri);
-       
     };
-    const submitHandler = (data: any) => {
-        console.log(`data`, data);
+
+    const [storeItem, {error}] = useMutation(STORE_ITEM, {
+        variables: {
+            item: formValues
+        }
+    })
+    console.log(`error`, error);
+    const submitHandler = async (data: any) => {
+        // alert('submitting');
+        // console.log(`formValues`, formValues);
+        const store = await storeItem();
+        console.log(`store`, store);
     }
 
+    const inputChangeHandler = (key: string, value: string) => {
+        setFormValues((prevState: any) => ({
+            ...prevState,
+            [key]: value
+        }))
+    }
 
-   
-    const data = [
-        {
-            key: 1, value: 'Foods',
-        },
-        {
-            key: 2, value: 'Soft Drinks',
-        },
-        {
-            key: 3, value: 'FISH',
-        },
-        {
-            key: 3, value: 'JUICE',
-        },
-        {
-            key: 3, value: 'SABON',
-        },
-        {
-            key: 3, value: 'CIGGARE',
-        },
-        {
-            key: 3, value: 'Alcohol',
-        },
-    ]
-    
     return (
         <ScrollView>
             <View style={{}}>
@@ -70,13 +79,34 @@ const NewItem = () => {
                                 <Image width={250} height={250} source={{uri: image}} />
                             )
                         }
-                        
                     </View>
                 </TouchableOpacity>
                 <View style={[styles.card]}>
+                <Layout>
+                        <Controller 
+                            name="barcode"
+                            control={control}
+                            render={({field: {onChange, value, onBlur}}) => ( 
+                                <View style={styles.formGroup}>
+                                    <TextInput 
+                                        placeholder="Barcode" 
+                                        style={styles.input}
+                                        onBlur={onBlur}
+                                        value={value}
+                                        onChangeText={value => {
+                                            onChange(value);
+                                            inputChangeHandler('barcode', value)
+                                        }}
+                                    />
+                                    { (errors as any)?.itemName?.message && <Text style={styles.textDanger}>{(errors as any)?.itemName?.message}</Text>}
+                                </View> 
+                            )}
+                            rules={{required: 'Barcode is required'}}
+                        />
+                    </Layout>
                     <Layout>
                         <Controller 
-                            name="itemName"
+                            name="name"
                             control={control}
                             render={({field: {onChange, value, onBlur}}) => ( 
                                 <View style={styles.formGroup}>
@@ -85,7 +115,10 @@ const NewItem = () => {
                                         style={styles.input}
                                         onBlur={onBlur}
                                         value={value}
-                                        onChangeText={value => onChange(value)}
+                                        onChangeText={value => {
+                                            onChange(value);
+                                            inputChangeHandler('name', value)
+                                        }}
                                     />
                                     { (errors as any)?.itemName?.message && <Text style={styles.textDanger}>{(errors as any)?.itemName?.message}</Text>}
                                 </View> 
@@ -104,7 +137,10 @@ const NewItem = () => {
                                         style={styles.input}
                                         onBlur={onBlur}
                                         value={value}
-                                        onChangeText={value => onChange(value)}
+                                        onChangeText={value => { 
+                                            inputChangeHandler('description', value);
+                                            onChange(value);
+                                        }}
                                     />
                                     { (errors as any)?.description?.message && <Text style={styles.textDanger}>{(errors as any)?.description?.message}</Text>}
                                 </View>
@@ -113,13 +149,17 @@ const NewItem = () => {
                         />
                     </Layout>
                     <Controller 
-                        name="category"
+                        name="categoryId"
                         control={control}
                         render={({field: {onChange, value, onBlur}}) => (
                             <View style={styles.formGroup}>
                                 <SelectList 
-                                    setSelected={(val: string) => (onChange(val))}
-                                    data={data}
+                                    setSelected={(val: string) => {
+                                        var id = categoriesSelectData?.find((category:Select) => category.value == val)?.key;
+                                        inputChangeHandler('categoryId', id)
+                                        onChange(id);
+                                    }}
+                                    data={categoriesSelectData}
                                     save="value"
                                     boxStyles={styles.input}
                                     placeholder="Select Category"
@@ -130,13 +170,17 @@ const NewItem = () => {
                         rules={{required: 'Category is required'}}
                     />
                     <Controller 
-                        name="supplier"
+                        name="supplierId"
                         control={control}
                         render={({field: {onChange, value, onBlur}}) => (
                             <View style={styles.formGroup}>
                                 <SelectList 
-                                    setSelected={(val: string) => (onChange(val))}
-                                    data={data}
+                                    setSelected={(val: string) => {
+                                        var id = supplierSelectData?.find((supplier:Select) => supplier.value == val)?.key;
+                                        inputChangeHandler('supplierId', id)
+                                        onChange(id);
+                                    }}
+                                    data={supplierSelectData}
                                     save="value"
                                     boxStyles={styles.input}
                                     placeholder="Select Supplier"
@@ -148,24 +192,27 @@ const NewItem = () => {
                     />
                     <Layout style={{flex:1, flexDirection: 'row', gap: 10}}>
                         <Controller 
-                            name="retailPrice"
+                            name="capital"
                             control={control}
                             render={({field: {onChange, value, onBlur}}) => (
                                 <View style={styles.formGroup}>
                                     <TextInput 
-                                        placeholder="Retail Price" 
+                                        placeholder="Capital" 
                                         style={styles.input}
                                         onBlur={onBlur}
                                         value={value}
-                                        onChangeText={value => onChange(value)}
+                                        onChangeText={value => {
+                                            inputChangeHandler('capital', value)
+                                            onChange(value)
+                                        }}
                                     />
-                                    { (errors as any)?.retailPrice?.message && <Text style={styles.textDanger}>{(errors as any)?.retailPrice?.message}</Text>}
+                                    { (errors as any)?.capital?.message && <Text style={styles.textDanger}>{(errors as any)?.capital?.message}</Text>}
                                 </View>
                             )}
-                            rules={{required: 'Retail Price is required'}}
+                            rules={{required: 'Capital is required'}}
                         />
                         <Controller 
-                            name="retailPrice"
+                            name="price"
                             control={control}
                             render={({field: {onChange, value, onBlur}}) => (
                                 <View style={styles.formGroup}>
@@ -174,12 +221,15 @@ const NewItem = () => {
                                         style={styles.input}
                                         onBlur={onBlur}
                                         value={value}
-                                        onChangeText={value => onChange(value)}
+                                        onChangeText={value => {
+                                            inputChangeHandler('price', value);
+                                            onChange(value);
+                                        }}
                                     />
-                                    { (errors as any)?.retailPrice?.message && <Text style={styles.textDanger}>{(errors as any)?.retailPrice?.message}</Text>}
+                                    { (errors as any)?.price?.message && <Text style={styles.textDanger}>{(errors as any)?.price?.message}</Text>}
                                 </View>
                             )}
-                            rules={{required: 'Retail Price is required'}}
+                            rules={{required: 'Price is required'}}
                         />
                     </Layout>
                     <Button title="Save Product" onPress={handleSubmit(submitHandler)} />
@@ -202,5 +252,10 @@ const localStyle = StyleSheet.create({
         alignItems: 'center'
     }
 })
+
+type Select = {
+    key: String;
+    value: String;
+}
 
 export default NewItem;

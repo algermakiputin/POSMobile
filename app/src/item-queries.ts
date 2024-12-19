@@ -11,3 +11,9 @@ export const GET_ITEMS = gql`
         }
     }
 `;
+
+export const STORE_ITEM = gql`
+    mutation StoreItem($item: ItemInput!) {
+        storeItem(item: $item)
+    }
+`;
